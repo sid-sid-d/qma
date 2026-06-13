@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find a Training Session — Queensland Masters Athletics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Saira+Condensed:wght@900&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --crimson:      #5A0C26;
+      --crimson-dark: #3A0718;
+      --crimson-deep: #200510;
+      --gold:         #FCA311;
+      --fire:         #FF1F1F;
+      --cyan:         #0AD3FF;
+      --off-white:    #F4F1EE;
+      --font-hero:    'Big Shoulders Display', Impact, sans-serif;
+      --font-display: 'Saira Condensed', 'Gill Sans Ultra Bold', Impact, sans-serif;
+      --font-body:    'Figtree', -apple-system, sans-serif;
+    }
+
+    body { font-family: var(--font-body); background: var(--crimson-deep); color: white; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Utility bar ── */
+    .utility-bar { background: var(--crimson-deep); padding: 7px 0; }
+    .utility-bar .container { display: flex; justify-content: flex-end; gap: 28px; }
+    .utility-bar a {
+      font-family: var(--font-display); font-weight: 700; font-size: 0.82rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .utility-bar a:hover { color: white; }
+
+    /* ── Header ── */
+    .header { background: var(--crimson-dark); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 24px; max-width: 1200px; margin: 0 auto;
+    }
+    .logo-area { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .logo-area img { height: 60px; width: auto; }
+    .logo-text { line-height: 1.1; }
+    .logo-text strong {
+      display: block; font-family: var(--font-display); font-weight: 700;
+      font-size: 1.2rem; color: white; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .logo-text span {
+      font-size: 0.68rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase;
+    }
+
+    /* ── Nav ── */
+    .main-nav { display: flex; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      display: block; font-family: var(--font-display); font-weight: 700;
+      font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.82); text-decoration: none; padding: 18px 14px;
+      transition: color 0.2s, background 0.2s; position: relative;
+    }
+    .nav-item > a::after {
+      content: ''; position: absolute; bottom: 0; left: 14px; right: 14px;
+      height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.2s;
+    }
+    .nav-item:hover > a { color: var(--gold); }
+    .nav-item:hover > a::after { transform: scaleX(1); }
+    .dropdown {
+      position: absolute; top: 100%; left: 0; min-width: 300px;
+      background: var(--crimson-dark); border-top: 3px solid var(--fire);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4); opacity: 0;
+      visibility: hidden; transform: translateY(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; z-index: 200;
+    }
+    .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-item:last-child .dropdown { left: auto; right: 0; }
+    .dropdown a {
+      display: block; font-family: var(--font-display); font-weight: 600;
+      font-size: 0.88rem; letter-spacing: 0.07em; text-transform: uppercase;
+      color: rgba(255,255,255,0.68); text-decoration: none;
+      padding: 12px 22px; transition: color 0.15s, background 0.15s, padding-left 0.15s;
+      border-bottom: 1px solid rgba(255,255,255,0.06); white-space: nowrap;
+    }
+    .dropdown a:last-child { border-bottom: none; }
+    .dropdown a.link-join { color: var(--cyan); }
+    .dropdown a.link-join:hover { color: white; background: rgba(10,211,255,0.08); }
+    .dropdown a:hover { color: var(--gold); background: rgba(252,163,17,0.07); padding-left: 28px; }
+    .has-dropdown > a::before {
+      content: '▾'; position: absolute; right: 4px; top: 50%;
+      transform: translateY(-50%); font-size: 0.6rem; color: var(--gold); opacity: 0.6;
+    }
+
+    /* ── Hamburger / mobile nav ── */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; background: none;
+      border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span { display: block; width: 26px; height: 3px; background: var(--gold); }
+    .mobile-nav { display: none; background: var(--crimson-dark); padding: 8px 24px 20px; }
+    .mobile-nav.open { display: block; }
+    .mob-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .mob-top {
+      display: flex; justify-content: space-between; align-items: center;
+      width: 100%; background: none; border: none; padding: 14px 0;
+      font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.82); cursor: pointer; text-align: left; transition: color 0.2s;
+    }
+    .mob-top:hover, .mob-top.active { color: var(--gold); }
+    .mob-chevron { display: inline-block; transition: transform 0.25s; }
+    .mob-top.active .mob-chevron { transform: rotate(90deg); }
+    .mob-sub { display: none; padding-bottom: 10px; }
+    .mob-sub.open { display: block; }
+    .mob-sub a {
+      display: block; padding: 8px 0 8px 16px;
+      font-family: var(--font-display); font-size: 0.82rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      color: rgba(255,255,255,0.5); transition: color 0.15s; text-decoration: none;
+    }
+    .mob-sub a:hover { color: var(--gold); }
+    .mob-sub a.link-join { color: var(--cyan); }
+    .mob-sub a.link-join:hover { color: white; }
+    .mob-standalone {
+      display: block; font-family: var(--font-display); font-weight: 700;
+      font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.82); padding: 14px 0;
+      border-top: 1px solid rgba(255,255,255,0.07); transition: color 0.2s; text-decoration: none;
+    }
+    .mob-standalone:hover { color: var(--gold); }
+
+    /* ── Shared ── */
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-display); font-weight: 700; font-size: 0.78rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .section-label::before { content: ''; display: block; width: 28px; height: 2px; background: var(--fire); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+      letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+      transition: all 0.2s; border: 2px solid transparent; text-decoration: none; padding: 13px 28px;
+    }
+    .btn-gold { background: var(--gold); color: var(--crimson-dark); }
+    .btn-gold:hover { background: white; transform: translateY(-2px); }
+    .btn-outline-white { background: transparent; color: white; border-color: rgba(255,255,255,0.4); }
+    .btn-outline-white:hover { border-color: var(--gold); color: var(--gold); }
+
+    .read-more-btn {
+      font-family: var(--font-display); font-weight: 700; font-size: 0.82rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); background: none; border: none; cursor: pointer;
+      padding: 0; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s;
+    }
+    .read-more-btn:hover { color: white; }
+    .read-more-btn .toggle-arrow { transition: transform 0.25s; display: inline-block; }
+    .read-more-btn.open .toggle-arrow { transform: rotate(180deg); }
+
+    /* ── Page hero ── */
+    .page-hero {
+      background: var(--crimson-dark); padding: 80px 0 64px;
+      border-bottom: 3px solid var(--fire); position: relative; overflow: hidden;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; right: -60px; top: -40px;
+      width: 340px; height: 340px; border: 2px solid rgba(252,163,17,0.08);
+      border-radius: 50%; pointer-events: none;
+    }
+    .page-title {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(2.8rem, 5vw, 5rem); color: white; text-transform: uppercase;
+      letter-spacing: -0.02em; line-height: 0.92; margin: 4px 0 24px;
+    }
+    .page-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.62); max-width: 580px; line-height: 1.7; }
+
+    /* ════════════════════════════════
+       FEATURED COACH SECTION
+    ════════════════════════════════ */
+    .coach-feature {
+      background: var(--crimson-dark);
+      border-bottom: 3px solid var(--fire);
+      padding: 0;
+    }
+
+    .coach-feature-inner {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      min-height: 560px;
+    }
+
+    .coach-photo-col {
+      position: relative;
+      overflow: hidden;
+    }
+    .coach-photo-col img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+    }
+    .coach-photo-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(32,5,16,0.92));
+      padding: 32px 24px 20px;
+    }
+    .coach-photo-overlay strong {
+      display: block; font-family: var(--font-display); font-weight: 900;
+      font-size: 1.8rem; letter-spacing: -0.01em; text-transform: uppercase; color: white;
+    }
+    .coach-photo-overlay span {
+      font-size: 0.84rem; color: var(--gold); letter-spacing: 0.04em;
+    }
+
+    .coach-info-col {
+      padding: 48px 52px;
+      display: flex; flex-direction: column; gap: 28px;
+    }
+
+    .coach-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .coach-tag {
+      font-family: var(--font-display); font-weight: 700; font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid rgba(252,163,17,0.4); color: var(--gold);
+      padding: 4px 12px;
+    }
+    .coach-tag.fire { border-color: rgba(255,31,31,0.4); color: var(--fire); }
+    .coach-tag.cyan { border-color: rgba(10,211,255,0.4); color: var(--cyan); }
+
+    .coach-bio-teaser {
+      font-size: 1.05rem; color: rgba(255,255,255,0.72); line-height: 1.78;
+      border-left: 3px solid var(--gold); padding-left: 20px; font-style: italic;
+    }
+
+    .coach-bio-full { display: none; }
+    .coach-bio-full.open { display: block; }
+    .coach-bio-full p {
+      font-size: 0.97rem; color: rgba(255,255,255,0.65); line-height: 1.82; margin-bottom: 14px;
+    }
+    .coach-bio-full p:last-child { margin-bottom: 0; }
+
+    /* Sessions + pricing 2-col */
+    .coach-details-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+
+    .session-list-heading {
+      font-family: var(--font-display); font-weight: 700; font-size: 0.75rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4);
+      margin-bottom: 12px;
+    }
+
+    .session-entry {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .session-entry:last-child { border-bottom: none; }
+
+    .session-entry-name {
+      font-family: var(--font-display); font-weight: 700; font-size: 0.95rem;
+      letter-spacing: 0.03em; text-transform: uppercase; color: white;
+      display: flex; align-items: center; gap: 8px; margin-bottom: 3px;
+    }
+    .masters-badge {
+      font-size: 0.62rem; background: var(--gold); color: var(--crimson-dark);
+      padding: 2px 7px; font-weight: 700; letter-spacing: 0.08em; flex-shrink: 0;
+    }
+    .session-entry-detail {
+      font-size: 0.84rem; color: rgba(255,255,255,0.5);
+    }
+
+    .pricing-block { display: flex; flex-direction: column; gap: 10px; }
+    .pricing-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .pricing-row:last-child { border-bottom: none; }
+    .pricing-row span { font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+    .pricing-row strong {
+      font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--gold);
+    }
+    .pricing-row .save-note {
+      font-size: 0.72rem; color: var(--fire); display: block; margin-top: 1px;
+    }
+
+    /* QMA member deal bar */
+    .qma-deal-bar {
+      background: rgba(10,211,255,0.08);
+      border: 1px solid rgba(10,211,255,0.25);
+      border-left: 4px solid var(--cyan);
+      padding: 16px 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .qma-deal-bar svg { flex-shrink: 0; color: var(--cyan); }
+    .qma-deal-bar-text strong {
+      display: block; font-family: var(--font-display); font-weight: 700;
+      font-size: 0.88rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 3px;
+    }
+    .qma-deal-bar-text p { font-size: 0.88rem; color: rgba(255,255,255,0.65); }
+
+    .coach-contact-row {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      padding-top: 4px;
+    }
+    .coach-contact-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-weight: 700; font-size: 0.85rem;
+      letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+      color: white; transition: color 0.2s;
+    }
+    .coach-contact-link:hover { color: var(--gold); }
+    .coach-contact-link svg { opacity: 0.6; }
+
+    /* ════════════════════════════════
+       SESSIONS SECTION
+    ════════════════════════════════ */
+    .sessions-section { padding: 64px 0; }
+
+    .sessions-intro {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: start; margin-bottom: 48px;
+    }
+    .sessions-intro h2 {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(2rem, 3vw, 3rem); text-transform: uppercase;
+      letter-spacing: -0.01em; color: white;
+    }
+    .sessions-intro p { font-size: 0.97rem; color: rgba(255,255,255,0.6); line-height: 1.8; }
+
+    /* Map */
+    .map-wrap {
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      margin-bottom: 56px;
+      position: relative;
+    }
+    .map-wrap::before {
+      content: 'Training locations across Queensland';
+      display: block;
+      background: var(--crimson-dark);
+      border-bottom: 2px solid var(--fire);
+      padding: 12px 20px;
+      font-family: var(--font-display); font-weight: 700; font-size: 0.78rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+    }
+    .map-wrap iframe { display: block; width: 100%; height: 420px; border: none; filter: saturate(0.4) contrast(1.1); }
+
+    /* Region headings */
+    .region-block { margin-bottom: 52px; }
+    .region-heading {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: 1.6rem; text-transform: uppercase; letter-spacing: -0.01em;
+      color: white; padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .region-heading::before {
+      content: ''; display: block; width: 10px; height: 10px;
+      background: var(--fire); border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* Session cards grid */
+    .session-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+
+    .session-card {
+      background: var(--crimson-dark);
+      border-top: 3px solid var(--crimson);
+      padding: 22px 24px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .session-card:hover { border-top-color: var(--gold); }
+    .session-card.sprint { border-top-color: var(--gold); }
+    .session-card.distance { border-top-color: var(--cyan); }
+    .session-card.alt { border-top-color: var(--fire); }
+
+    .card-discipline {
+      font-family: var(--font-display); font-weight: 700; font-size: 0.68rem;
+      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .session-card.sprint .card-discipline { color: var(--gold); }
+    .session-card.distance .card-discipline { color: var(--cyan); }
+    .session-card.alt .card-discipline { color: var(--fire); }
+
+    .card-venue {
+      font-family: var(--font-display); font-weight: 900; font-size: 1.15rem;
+      text-transform: uppercase; letter-spacing: 0.01em; color: white;
+      margin-bottom: 14px; line-height: 1.2;
+    }
+
+    .card-rows { display: flex; flex-direction: column; gap: 7px; }
+    .card-row {
+      display: flex; gap: 10px; font-size: 0.86rem;
+    }
+    .card-row-label {
+      color: rgba(255,255,255,0.35); font-size: 0.72rem; letter-spacing: 0.06em;
+      text-transform: uppercase; min-width: 56px; padding-top: 2px; flex-shrink: 0;
+    }
+    .card-row-value { color: rgba(255,255,255,0.75); line-height: 1.45; }
+    .card-row-value a { color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.2s; }
+    .card-row-value a:hover { color: var(--gold); }
+
+    .card-note {
+      margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.82rem; color: rgba(255,255,255,0.42); font-style: italic; line-height: 1.5;
+    }
+
+    .card-map-link {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+      font-family: var(--font-display); font-weight: 700; font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s;
+    }
+    .card-map-link:hover { color: var(--gold); }
+
+    /* Discipline sub-heading within region */
+    .discipline-sub {
+      font-family: var(--font-display); font-weight: 700; font-size: 0.75rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35);
+      margin: 28px 0 12px;
+    }
+
+    /* ── CTA ── */
+    .page-cta {
+      background: var(--crimson-dark); border-top: 3px solid var(--fire);
+      padding: 64px 0; text-align: center;
+    }
+    .page-cta h2 {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; color: white; margin-bottom: 14px;
+    }
+    .page-cta p { color: rgba(255,255,255,0.6); margin-bottom: 32px; font-size: 1rem; }
+    .btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── Footer ── */
+    .footer { background: var(--crimson-dark); padding: 60px 0 0; }
+    .footer-top { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 48px; }
+    .footer-brand { display: flex; align-items: flex-start; gap: 20px; }
+    .footer-brand img { height: 72px; width: auto; flex-shrink: 0; }
+    .footer-brand address { font-style: normal; font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+    .footer-brand address strong { display: block; color: white; margin-bottom: 8px; font-family: var(--font-display); font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .footer-brand address a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    .footer-brand address a:hover { color: var(--gold); }
+    .footer-connect h4 { font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+    .social-links { display: flex; gap: 10px; margin-bottom: 20px; }
+    .social-link { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.75); text-decoration: none; transition: all 0.2s; }
+    .social-link:hover { background: var(--gold); color: var(--crimson-dark); border-color: var(--gold); }
+    .footer-vol-qld { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+    .footer-vol-qld a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    .footer-vol-qld a:hover { color: var(--gold); }
+    .footer-links-bar { display: flex; flex-wrap: wrap; gap: 2px; justify-content: center; border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 0; }
+    .footer-links-bar a { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; padding: 5px 12px; transition: color 0.2s; }
+    .footer-links-bar a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 16px 0; font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .main-nav { display: none; }
+      .hamburger { display: flex; }
+      .coach-feature-inner { grid-template-columns: 1fr; }
+      .coach-photo-col { min-height: 320px; }
+      .coach-info-col { padding: 36px 24px; }
+      .coach-details-grid { grid-template-columns: 1fr; }
+      .sessions-intro { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; }
+      .footer-brand { flex-direction: column; gap: 12px; }
+    }
+    @media (max-width: 600px) {
+      .session-cards { grid-template-columns: 1fr; }
+      .coach-contact-row { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Utility bar ── -->
+<div class="utility-bar">
+  <div class="container">
+    <a href="#">Results</a>
+    <a href="#">Join</a>
+    <a href="#">Shop</a>
+  </div>
+</div>
+
+<!-- ── Header ── -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-area">
+      <img src="qma_logo_v2.svg" alt="Queensland Masters Athletics">
+      <div class="logo-text">
+        <strong>Queensland Masters Athletics</strong>
+        <span>Adult Track &amp; Field</span>
+      </div>
+    </a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <div class="nav-item has-dropdown">
+        <a href="#">Train</a>
+        <div class="dropdown">
+          <a href="#">Getting started</a>
+          <a href="find-a-session.html">Find a training session</a>
+          <a href="#">Meet a coach</a>
+          <a href="#">Set up a local squad</a>
+          <a href="#">Younger than 30?</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#">Compete</a>
+        <div class="dropdown">
+          <a href="#" class="link-join">Join QMA</a>
+          <a href="#">Calendar</a>
+          <a href="#">Membership benefits</a>
+          <a href="#">Results</a>
+          <a href="#">Records</a>
+          <a href="#">Online options</a>
+          <a href="#">Buy the uniform</a>
+          <a href="#">Am I ready?</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#">Learn</a>
+        <div class="dropdown">
+          <a href="#">How does track &amp; field work?</a>
+          <a href="the-events.html">The individual events</a>
+          <a href="#">Self-coaching resources</a>
+          <a href="#">Rules &amp; regulations</a>
+          <a href="#">Considerations for the older athlete</a>
+          <a href="#">Fitness, health &amp; injury</a>
+          <a href="meet-an-athlete.html">Meet an athlete</a>
+          <a href="#">Become a coach</a>
+          <a href="#">FAQ</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#">Volunteer</a>
+        <div class="dropdown">
+          <a href="#">Volunteer at the track</a>
+          <a href="#">Volunteer behind the scenes</a>
+          <a href="#">Become an accredited official</a>
+          <a href="#">Meet our volunteers</a>
+          <a href="#">Volunteering Queensland</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#">Locations</a>
+        <div class="dropdown">
+          <a href="#">Brisbane</a>
+          <a href="#">Gold Coast</a>
+          <a href="#">Sunshine Coast</a>
+          <a href="#">Toowoomba</a>
+          <a href="#">Far North Queensland</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#">About</a>
+        <div class="dropdown">
+          <a href="#">The association</a>
+          <a href="#">History</a>
+          <a href="#">Management team</a>
+          <a href="#">News</a>
+          <a href="#">Our venues</a>
+          <a href="#">Minutes, reports &amp; publications</a>
+          <a href="#">Public liability</a>
+          <a href="#">Media</a>
+        </div>
+      </div>
+    </nav>
+
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Train <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#">Getting started</a>
+        <a href="find-a-session.html">Find a training session</a>
+        <a href="#">Meet a coach</a>
+        <a href="#">Set up a local squad</a>
+        <a href="#">Younger than 30?</a>
+      </div>
+    </div>
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Compete <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#" class="link-join">Join QMA</a>
+        <a href="#">Calendar</a>
+        <a href="#">Membership benefits</a>
+        <a href="#">Results</a>
+        <a href="#">Records</a>
+        <a href="#">Buy the uniform</a>
+        <a href="#">Am I ready?</a>
+      </div>
+    </div>
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Learn <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#">How does track &amp; field work?</a>
+        <a href="the-events.html">The individual events</a>
+        <a href="meet-an-athlete.html">Meet an athlete</a>
+        <a href="#">FAQ</a>
+      </div>
+    </div>
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Volunteer <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#">Volunteer at the track</a>
+        <a href="#">Become an accredited official</a>
+        <a href="#">Volunteering Queensland</a>
+      </div>
+    </div>
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Locations <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#">Brisbane</a>
+        <a href="#">Gold Coast</a>
+        <a href="#">Sunshine Coast</a>
+        <a href="#">Toowoomba</a>
+        <a href="#">Far North Queensland</a>
+      </div>
+    </div>
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">About <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#">The association</a>
+        <a href="#">News</a>
+        <a href="#">Our venues</a>
+        <a href="#">Public liability</a>
+      </div>
+    </div>
+    <a href="#" class="mob-standalone">Results</a>
+    <a href="#" class="mob-standalone">Join</a>
+    <a href="#" class="mob-standalone">Shop</a>
+  </nav>
+</header>
+
+<!-- ── Page hero ── -->
+<section class="page-hero">
+  <div class="container">
+    <div class="section-label">Train</div>
+    <h1 class="page-title">Find a training<br>session</h1>
+    <p>Track and field is a coached sport. The athletes on your local start line didn't get there alone, and neither will you. Every structured training option available through the QMA network is listed below.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FEATURED COACH: LISA MORAN
+     ══════════════════════════════════════ -->
+<section class="coach-feature" aria-labelledby="featured-coach-heading">
+  <div class="coach-feature-inner">
+
+    <div class="coach-photo-col">
+      <img src="https://images.unsplash.com/photo-1750698544794-bf1cd7038f92?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="Lisa Moran and Kate Burgess, Sprint and Speed Coaches">
+      <div class="coach-photo-overlay">
+        <strong>Moran &amp; Burgess Coaching</strong>
+        <span>Lisa Moran &amp; Kate Burgess · Sprint &amp; Speed, Brisbane</span>
+      </div>
+    </div>
+
+    <div class="coach-info-col">
+      <div>
+        <div class="section-label" id="featured-coach-heading">Featured Coaches</div>
+        <div class="coach-tags">
+          <span class="coach-tag">Sprints</span>
+          <span class="coach-tag">Speed Development</span>
+          <span class="coach-tag fire">Masters Specialist</span>
+          <span class="coach-tag cyan">AA Level 2 Certified</span>
+        </div>
+      </div>
+
+      <p class="coach-bio-teaser">"Most of our athletes in the 30-40 bracket arrive with the same belief: that they've missed their window. That competitive athletics was something they should have kept up in their twenties, and now it's too late to be any good. Between the two of us, we've made it our business to prove that wrong."</p>
+
+      <div>
+        <button class="read-more-btn" onclick="toggleCoachBio()" id="coachBioBtn" aria-expanded="false">
+          Read our coaching philosophy <span class="toggle-arrow">&#8595;</span>
+        </button>
+        <div class="coach-bio-full" id="coachBioFull">
+          <p style="margin-top:20px;"><strong style="color:white;">Lisa</strong> came back to competitive athletics at 34, after nearly a decade away. Full-time project management role, two daughters under five, and the kind of accumulated stiffness that makes you question whether you stretched properly in your twenties. <strong style="color:white;">Kate</strong> never really stopped competing, but shifted from open to masters athletics at 37 when she realised the age-group rankings suited her considerably better than the open field.</p>
+          <p>Together we coach athletes who are serious about performance without sacrificing the rest of their lives to get it. The 30-40 age bracket is our favourite group to work with. They have life discipline, they follow programs, they actually listen to feedback, and they bring a focus to sessions that twenty-two-year-olds rarely manage.</p>
+          <p>What athletes in this bracket need is different, not less. More deliberate warm-up protocols. Targeted strength work alongside track sessions. A training schedule that respects the reality that you have a job, possibly kids, and a life outside the track. Our approach is periodised and evidence-based: a 16-week competition preparation cycle with a base phase, a development phase, and a competition sharpening phase.</p>
+          <p>For athletes new to masters athletics, we typically recommend starting with two quality sessions per week and being intentional about a third easy recovery session. Within six months, most athletes in the 30-40 bracket are running faster times than they expected, often faster than they ran at university. That tends to be the moment they're fully converted.</p>
+          <p>If you're sitting on the fence about whether this is for you: come to a session. We'll show you what your legs are actually capable of right now.</p>
+        </div>
+      </div>
+
+      <div class="coach-details-grid">
+        <!-- Sessions -->
+        <div>
+          <div class="session-list-heading">Training sessions</div>
+          <div class="session-entry">
+            <div class="session-entry-name">
+              Saturday Masters Session <span class="masters-badge">QMA Masters</span>
+            </div>
+            <div class="session-entry-detail">Sat 7:30am – 9:00am · QSAC Nathan · $8 (QMA members $6)</div>
+          </div>
+          <div class="session-entry">
+            <div class="session-entry-name">Speed Endurance</div>
+            <div class="session-entry-detail">Tue 6:00pm – 7:30pm · QSAC Nathan · $10</div>
+          </div>
+          <div class="session-entry">
+            <div class="session-entry-name">Track Intervals</div>
+            <div class="session-entry-detail">Thu 6:00pm – 7:30pm · QSAC Nathan · $10</div>
+          </div>
+          <div class="session-entry">
+            <div class="session-entry-name">Early Speed Work</div>
+            <div class="session-entry-detail">Wed 6:00am – 7:15am · QSAC Nathan · $10</div>
+          </div>
+          <div class="session-entry">
+            <div class="session-entry-name">Technique &amp; Drills</div>
+            <div class="session-entry-detail">Sun 8:00am – 9:30am · QSAC Nathan · $10</div>
+          </div>
+        </div>
+
+        <!-- Pricing -->
+        <div>
+          <div class="session-list-heading">Private coaching</div>
+          <div class="pricing-block">
+            <div class="pricing-row">
+              <span>Single session (1 hr)</span>
+              <strong>$95</strong>
+            </div>
+            <div class="pricing-row">
+              <span>Block of 5 sessions<span class="save-note">Save $55</span></span>
+              <strong>$420</strong>
+            </div>
+            <div class="pricing-row">
+              <span>Video technique analysis</span>
+              <strong>$65</strong>
+            </div>
+            <div class="pricing-row">
+              <span>Remote programming (monthly)</span>
+              <strong>$180</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QMA deal -->
+      <div class="qma-deal-bar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <div class="qma-deal-bar-text">
+          <strong>QMA Member Deal</strong>
+          <p>15% off all private coaching packages, and your first open group session is complimentary. Show your current QMA membership at the gate.</p>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="coach-contact-row">
+        <a href="https://www.moranburgesscoachin.com.au" class="coach-contact-link" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          moranburgesscoachin.com.au
+        </a>
+        <a href="tel:0412348207" class="coach-contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.64A2 2 0 012 .78h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          0412 348 207
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     ALL SESSIONS
+     ══════════════════════════════════════ -->
+<section class="sessions-section">
+  <div class="container">
+
+    <div class="sessions-intro">
+      <h2>All training sessions</h2>
+      <p>Sessions are run by individual coaches and clubs across South East Queensland. Contact details are listed on each card. All fees and schedules are set by the session organiser and may change. Check with the contact before attending for the first time.</p>
+    </div>
+
+    <!-- Map -->
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1811000!2d153.02!3d-27.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b91579aac93d233%3A0x402a35af3deaf40!2sSouth%20East%20Queensland%2C%20Australia!5e0!3m2!1sen!2sau!4v1700000000000!5m2!1sen!2sau"
+        title="Training session locations across South East Queensland"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <!-- ─── BRISBANE ─── -->
+    <div class="region-block" id="region-brisbane">
+      <h2 class="region-heading">Brisbane</h2>
+
+      <div class="discipline-sub">Sprint training</div>
+      <div class="session-cards">
+
+        <article class="session-card sprint">
+          <div class="card-discipline">Sprint</div>
+          <div class="card-venue">QSAC — SAF or Main Track, Nathan</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Wednesdays 7:00am &amp; Saturdays 7:00am, all year</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Sprints and conditioning for sprints</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value">John Wight · <a href="mailto:oj.rbwight@gmail.com">oj.rbwight@gmail.com</a></span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Cost</span>
+              <span class="card-row-value">$6 (card Wed, cash Sat)</span>
+            </div>
+          </div>
+          <p class="card-note">Coffee meetup at McDonald's Sunnybank after Saturday sessions.</p>
+          <a href="https://maps.google.com/?q=QSAC+Stadium+Nathan+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+        <article class="session-card sprint">
+          <div class="card-discipline">Sprint</div>
+          <div class="card-venue">QSAC — SAF or Main Track, Nathan (Early)</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Wednesdays 6:00am, all year</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Sprint interval training targeting 100m / 200m / 400m races</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value">Graham Scully · <a href="mailto:scullygra@gmail.com">scullygra@gmail.com</a></span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Cost</span>
+              <span class="card-row-value">$6</span>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=QSAC+Stadium+Nathan+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+        <article class="session-card sprint">
+          <div class="card-discipline">Sprint · Hurdles · Field</div>
+          <div class="card-venue">Nudgee College Oval</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Tuesdays &amp; Thursdays 5:30pm – 7:30pm, all year</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Sprints training and coaching</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value">Travis Venema · <a href="tel:0409263579">0409 263 579</a> · <a href="mailto:travis.venema@gmail.com">travis.venema@gmail.com</a></span>
+            </div>
+          </div>
+          <p class="card-note">Qualified coach with Olympic and Commonwealth Games experience.</p>
+          <a href="https://maps.google.com/?q=Nudgee+College+Brisbane+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+        <article class="session-card sprint">
+          <div class="card-discipline">Sprint · Hurdles</div>
+          <div class="card-venue">Keith Beavis Oval, Windsor</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Mon, Wed, Fri 3:30pm (winter season)</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Sprints and hurdles training</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value">Harry Giles · <a href="tel:0472715096">0472 715 096</a></span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Cost</span>
+              <span class="card-row-value">No charge</span>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=Keith+Beavis+Oval+Windsor+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+        <article class="session-card sprint">
+          <div class="card-discipline">Sprint · Distance</div>
+          <div class="card-venue">Clem Jones Centre, Carina (TEES)</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Mondays 6:00pm, all year</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Sprints</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value"><a href="mailto:tees@teesathletics.org.au">tees@teesathletics.org.au</a></span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Cost</span>
+              <span class="card-row-value">$40 per year (club membership covers all sessions)</span>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=Clem+Jones+Centre+Carina+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+      </div>
+
+      <div class="discipline-sub" style="margin-top: 32px;">Field event training</div>
+      <div class="session-cards">
+        <article class="session-card sprint">
+          <div class="card-discipline">All field disciplines</div>
+          <div class="card-venue">QSAC — SAF or Main Track, Nathan</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Selected Sundays 8:00am (check Brisbane Calendar)</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">All disciplines, by yourself or with a group</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Cost</span>
+              <span class="card-row-value">$6</span>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=QSAC+Stadium+Nathan+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+      </div>
+
+      <div class="discipline-sub" style="margin-top: 32px;">Middle distance &amp; distance</div>
+      <div class="session-cards">
+
+        <article class="session-card distance">
+          <div class="card-discipline">Middle Distance · Distance</div>
+          <div class="card-venue">Clem Jones Centre, Carina (TEES)</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Mondays &amp; Thursdays 6:00pm, all year</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Distance and middle distance</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value"><a href="mailto:tees@teesathletics.org.au">tees@teesathletics.org.au</a></span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Cost</span>
+              <span class="card-row-value">$40 per year (club membership covers all sessions)</span>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=Clem+Jones+Centre+Carina+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+      </div>
+
+      <div class="discipline-sub" style="margin-top: 32px;">Alternative &amp; rehab</div>
+      <div class="session-cards">
+        <article class="session-card alt">
+          <div class="card-discipline">Deep Water Running</div>
+          <div class="card-venue">Yeronga Park Swimming Pool, 55 School Rd, Yeronga</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Fridays 11:00am</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value">Col Buyers · <a href="tel:0434731565">0434 731 565</a> · <a href="mailto:colinbuyers@gmail.com">colinbuyers@gmail.com</a></span>
+            </div>
+          </div>
+          <p class="card-note">Flotation belt required. Belts can be borrowed at the pool. Heated pool.</p>
+          <a href="https://maps.google.com/?q=Yeronga+Park+Swimming+Pool+Yeronga+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+      </div>
+    </div>
+
+    <!-- ─── IPSWICH ─── -->
+    <div class="region-block" id="region-ipswich">
+      <h2 class="region-heading">Ipswich</h2>
+
+      <div class="discipline-sub">Middle distance &amp; distance</div>
+      <div class="session-cards">
+
+        <article class="session-card distance">
+          <div class="card-discipline">Middle Distance · Distance</div>
+          <div class="card-venue">Bill Paterson Oval, Limestone Park, Ipswich</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Tuesdays &amp; Thursdays 4:00pm</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Interval training for middle to distance athletes</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value">Chris Davis · <a href="mailto:christopherdavis@live.com.au">christopherdavis@live.com.au</a> · <a href="tel:0438035186">0438 035 186</a></span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Cost</span>
+              <span class="card-row-value">No charge</span>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=Bill+Paterson+Oval+Limestone+Park+Ipswich+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+        <article class="session-card distance">
+          <div class="card-discipline">Distance</div>
+          <div class="card-venue">Near Ipswich District Court, Ellenborough St, Ipswich</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Sundays 5:00am</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Long run</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value">Chris Davis · <a href="mailto:christopherdavis@live.com.au">christopherdavis@live.com.au</a> · <a href="tel:0438035186">0438 035 186</a></span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Cost</span>
+              <span class="card-row-value">No charge</span>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=Ipswich+District+Court+Ellenborough+St+Ipswich+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ─── GOLD COAST ─── -->
+    <div class="region-block" id="region-goldcoast">
+      <h2 class="region-heading">Gold Coast</h2>
+
+      <div class="discipline-sub">Sprint training</div>
+      <div class="session-cards">
+
+        <article class="session-card sprint">
+          <div class="card-discipline">Sprint</div>
+          <div class="card-venue">Griffith University Gold Coast Track</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Tue &amp; Thu 4:00pm – 6:00pm, Sundays 7:30am – 9:30am, all year</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Sprints training and coaching</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value">Chris Brack · <a href="mailto:bracky428@gmail.com">bracky428@gmail.com</a></span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Cost</span>
+              <span class="card-row-value">$4 track fee</span>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=Griffith+University+Gold+Coast+Campus+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+        <article class="session-card sprint">
+          <div class="card-discipline">Sprint</div>
+          <div class="card-venue">Gold Coast Performance Centre, Runaway Bay</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Mon, Wed, Fri 4:00pm – 6:00pm, all year</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Sprints training and coaching</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value">Chris Brack · <a href="mailto:bracky428@gmail.com">bracky428@gmail.com</a></span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Cost</span>
+              <span class="card-row-value">$4 track fee</span>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=Runaway+Bay+Gold+Coast+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ─── SUNSHINE COAST ─── -->
+    <div class="region-block" id="region-sunshinecoast">
+      <h2 class="region-heading">Sunshine Coast</h2>
+
+      <div class="discipline-sub">Sprint training</div>
+      <div class="session-cards">
+        <article class="session-card sprint">
+          <div class="card-discipline">Sprint</div>
+          <div class="card-venue">University of the Sunshine Coast Track, Sippy Downs</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Tue, Wed, Thu 5:00pm – 6:00pm</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Sprints: 100m to 400m</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Contact</span>
+              <span class="card-row-value">Michael Menner · <a href="tel:0458315553">0458 315 553</a> · <a href="mailto:mmenner1@bigpond.com">mmenner1@bigpond.com</a></span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">Cost</span>
+              <span class="card-row-value">$20 per session</span>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=University+of+the+Sunshine+Coast+Sippy+Downs+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+      </div>
+
+      <div class="discipline-sub" style="margin-top: 32px;">Middle distance &amp; distance</div>
+      <div class="session-cards">
+
+        <article class="session-card distance">
+          <div class="card-discipline">Distance</div>
+          <div class="card-venue">Alexandra Headland</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Mondays 5:00pm</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Hill sprints alternating with 8 – 12km run on undulating bush trails</span>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?q=Alexandra+Headland+Sunshine+Coast+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+        <article class="session-card distance">
+          <div class="card-discipline">Distance</div>
+          <div class="card-venue">Alexandra Headland SLSC</div>
+          <div class="card-rows">
+            <div class="card-row">
+              <span class="card-row-label">When</span>
+              <span class="card-row-value">Sundays 6:00am (winter) / 5:30am (summer)</span>
+            </div>
+            <div class="card-row">
+              <span class="card-row-label">What</span>
+              <span class="card-row-value">Group long run for distance runners</span>
+            </div>
+          </div>
+          <p class="card-note">Breakfast at a cafe afterward.</p>
+          <a href="https://maps.google.com/?q=Alexandra+Headland+SLSC+QLD" class="card-map-link" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Open in maps
+          </a>
+        </article>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="page-cta">
+  <div class="container">
+    <h2>Want to be listed here?</h2>
+    <p>If you run a coached session that's open to masters or adult athletes, get in touch and we'll add you to the directory.</p>
+    <div class="btn-row">
+      <a href="mailto:secretary@qldmastersathletics.org.au" class="btn btn-gold">Contact QMA</a>
+      <a href="index.html" class="btn btn-outline-white">Back to home</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="qma_logo_v2.svg" alt="Queensland Masters Athletics">
+        <address>
+          <strong>Contact Us</strong>
+          Queensland Masters Athletics Association<br>
+          PO Box 474, Sunnybank QLD 4109<br>
+          Primary Venue: QSAC Stadium, Kessells Road, Nathan<br>
+          ABN: 18 371 441 363<br>
+          <a href="mailto:secretary@qldmastersathletics.org.au">secretary@qldmastersathletics.org.au</a>
+        </address>
+      </div>
+      <div class="footer-connect">
+        <h4>Connect Online</h4>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.585.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+        <p class="footer-vol-qld">QMA is a member of <a href="#">Volunteering Queensland</a></p>
+        <p class="footer-vol-qld" style="margin-top:6px;">Action photography by <a href="https://www.joharlow.com.au" target="_blank" rel="noopener">Jo Harlow</a></p>
+      </div>
+    </div>
+    <nav class="footer-links-bar" aria-label="Footer links">
+      <a href="#">Join</a>
+      <a href="#">Compete</a>
+      <a href="#">Newsletter</a>
+      <a href="#">Shop</a>
+      <a href="#">Public liability</a>
+      <a href="#">Privacy policy</a>
+      <a href="#">Terms and conditions</a>
+      <a href="#">Website terms of use</a>
+      <a href="#">Report website issue</a>
+    </nav>
+    <div class="footer-bottom">
+      <span>© 2026 Queensland Masters Athletics Association</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburgerBtn');
+    const isOpen = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+  }
+
+  function toggleMobileSubmenu(btn) {
+    const sub = btn.nextElementSibling;
+    const isOpen = sub.classList.toggle('open');
+    btn.classList.toggle('active', isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
+  }
+
+  function toggleCoachBio() {
+    const bio = document.getElementById('coachBioFull');
+    const btn = document.getElementById('coachBioBtn');
+    const isOpen = bio.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
+    btn.querySelector('.toggle-arrow').innerHTML = isOpen ? '&#8593;' : '&#8595;';
+    btn.childNodes[0].textContent = isOpen ? "Close " : "Read Lisa's coaching philosophy ";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Events — Queensland Masters Athletics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Saira+Condensed:wght@900&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --crimson:      #5A0C26;
+      --crimson-dark: #3A0718;
+      --crimson-deep: #200510;
+      --gold:         #FCA311;
+      --fire:         #FF1F1F;
+      --cyan:         #0AD3FF;
+      --off-white:    #F4F1EE;
+      --font-hero:    'Big Shoulders Display', Impact, sans-serif;
+      --font-display: 'Saira Condensed', 'Gill Sans Ultra Bold', Impact, sans-serif;
+      --font-body:    'Figtree', -apple-system, sans-serif;
+    }
+
+    body { font-family: var(--font-body); background: var(--crimson-deep); color: white; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Utility bar ── */
+    .utility-bar { background: var(--crimson-deep); padding: 7px 0; }
+    .utility-bar .container { display: flex; justify-content: flex-end; gap: 28px; }
+    .utility-bar a {
+      font-family: var(--font-display); font-weight: 700; font-size: 0.82rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .utility-bar a:hover { color: white; }
+
+    /* ── Header ── */
+    .header { background: var(--crimson-dark); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 24px; max-width: 1200px; margin: 0 auto;
+    }
+    .logo-area { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .logo-area img { height: 60px; width: auto; }
+    .logo-text { line-height: 1.1; }
+    .logo-text strong {
+      display: block; font-family: var(--font-display); font-weight: 700;
+      font-size: 1.2rem; color: white; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .logo-text span {
+      font-size: 0.68rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase;
+    }
+
+    /* ── Nav ── */
+    .main-nav { display: flex; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      display: block; font-family: var(--font-display); font-weight: 700;
+      font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.82); text-decoration: none; padding: 18px 14px;
+      transition: color 0.2s, background 0.2s; position: relative;
+    }
+    .nav-item > a::after {
+      content: ''; position: absolute; bottom: 0; left: 14px; right: 14px;
+      height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.2s;
+    }
+    .nav-item:hover > a { color: var(--gold); }
+    .nav-item:hover > a::after { transform: scaleX(1); }
+    .dropdown {
+      position: absolute; top: 100%; left: 0; min-width: 300px;
+      background: var(--crimson-dark); border-top: 3px solid var(--fire);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4); opacity: 0;
+      visibility: hidden; transform: translateY(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; z-index: 200;
+    }
+    .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-item:last-child .dropdown { left: auto; right: 0; }
+    .dropdown a {
+      display: block; font-family: var(--font-display); font-weight: 600;
+      font-size: 0.88rem; letter-spacing: 0.07em; text-transform: uppercase;
+      color: rgba(255,255,255,0.68); text-decoration: none;
+      padding: 12px 22px; transition: color 0.15s, background 0.15s, padding-left 0.15s;
+      border-bottom: 1px solid rgba(255,255,255,0.06); white-space: nowrap;
+    }
+    .dropdown a:last-child { border-bottom: none; }
+    .dropdown a.link-join { color: var(--cyan); }
+    .dropdown a.link-join:hover { color: white; background: rgba(10,211,255,0.08); }
+    .dropdown a:hover { color: var(--gold); background: rgba(252,163,17,0.07); padding-left: 28px; }
+    .has-dropdown > a::before {
+      content: '▾'; position: absolute; right: 4px; top: 50%;
+      transform: translateY(-50%); font-size: 0.6rem; color: var(--gold); opacity: 0.6;
+    }
+
+    /* ── Hamburger / mobile nav ── */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; background: none;
+      border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span { display: block; width: 26px; height: 3px; background: var(--gold); }
+    .mobile-nav { display: none; background: var(--crimson-dark); padding: 8px 24px 20px; }
+    .mobile-nav.open { display: block; }
+    .mob-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .mob-top {
+      display: flex; justify-content: space-between; align-items: center;
+      width: 100%; background: none; border: none; padding: 14px 0;
+      font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.82); cursor: pointer; text-align: left; transition: color 0.2s;
+    }
+    .mob-top:hover, .mob-top.active { color: var(--gold); }
+    .mob-chevron { display: inline-block; transition: transform 0.25s; }
+    .mob-top.active .mob-chevron { transform: rotate(90deg); }
+    .mob-sub { display: none; padding-bottom: 10px; }
+    .mob-sub.open { display: block; }
+    .mob-sub a {
+      display: block; padding: 8px 0 8px 16px;
+      font-family: var(--font-display); font-size: 0.82rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      color: rgba(255,255,255,0.5); transition: color 0.15s; text-decoration: none;
+    }
+    .mob-sub a:hover { color: var(--gold); }
+    .mob-sub a.link-join { color: var(--cyan); }
+    .mob-sub a.link-join:hover { color: white; }
+    .mob-standalone {
+      display: block; font-family: var(--font-display); font-weight: 700;
+      font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.82); padding: 14px 0;
+      border-top: 1px solid rgba(255,255,255,0.07); transition: color 0.2s; text-decoration: none;
+    }
+    .mob-standalone:hover { color: var(--gold); }
+
+    /* ── Page hero ── */
+    .page-hero {
+      background: var(--crimson-dark); padding: 80px 0 64px;
+      border-bottom: 3px solid var(--fire);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; right: -60px; top: -40px;
+      width: 340px; height: 340px;
+      border: 2px solid rgba(252,163,17,0.08);
+      border-radius: 50%; pointer-events: none;
+    }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-display); font-weight: 900; font-size: 0.78rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .section-label::before {
+      content: ''; display: block; width: 28px; height: 2px; background: var(--fire);
+    }
+    .page-title {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      color: white; text-transform: uppercase;
+      letter-spacing: -0.02em; line-height: 0.92;
+      margin: 4px 0 24px;
+    }
+    .page-hero p {
+      font-size: 1.05rem; color: rgba(255,255,255,0.62);
+      max-width: 580px; line-height: 1.7;
+    }
+
+    /* ── Discipline group headers ── */
+    .discipline-header {
+      padding: 56px 0 0;
+    }
+    .discipline-heading {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      text-transform: uppercase; letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.18);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 16px; margin-bottom: 0;
+    }
+
+    /* ── Event rows ── */
+    .event-row {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 0;
+      position: relative;
+    }
+    .event-row::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, var(--fire) 0%, var(--gold) 25%, rgba(255,255,255,0.04) 70%, transparent 100%);
+    }
+
+    /* Alternating row treatment */
+    .event-row.alt { background: rgba(58,7,24,0.45); }
+    .event-row.alt .event-sidebar { background: rgba(20,3,10,0.5); }
+
+    .event-body {
+      padding: 48px 48px 48px 48px;
+      position: relative;
+    }
+
+    .event-discipline-tag {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 6px;
+    }
+    .event-row.field-event .event-discipline-tag { color: var(--fire); }
+
+    .event-name {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.88;
+      color: white; margin-bottom: 24px;
+    }
+
+    .event-teaser {
+      font-size: 1rem; color: rgba(255,255,255,0.65);
+      line-height: 1.78; max-width: 620px; margin-bottom: 22px;
+    }
+
+    .read-more-btn {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); background: none; border: none; cursor: pointer;
+      padding: 0; display: inline-flex; align-items: center; gap: 8px;
+      transition: color 0.2s;
+    }
+    .read-more-btn:hover { color: white; }
+    .read-more-btn .toggle-arrow { transition: transform 0.25s; display: inline-block; }
+    .read-more-btn.open .toggle-arrow { transform: rotate(180deg); }
+
+    .event-full-bio {
+      display: none; margin-top: 28px; padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.09);
+      max-width: 620px;
+    }
+    .event-full-bio.open { display: block; }
+    .event-full-bio p {
+      font-size: 0.97rem; color: rgba(255,255,255,0.65);
+      line-height: 1.82; margin-bottom: 16px;
+    }
+    .event-full-bio p:last-child { margin-bottom: 0; }
+    .event-full-bio blockquote {
+      border-left: 3px solid var(--gold); padding-left: 20px;
+      margin: 24px 0; font-style: italic;
+      color: rgba(255,255,255,0.8); font-size: 1rem; line-height: 1.7;
+    }
+    .event-full-bio a {
+      color: var(--gold); text-underline-offset: 3px;
+    }
+    .event-full-bio a:hover { color: white; }
+
+    /* ── Event sidebar ── */
+    .event-sidebar {
+      background: rgba(0,0,0,0.2);
+      border-left: 1px solid rgba(255,255,255,0.07);
+      padding: 48px 32px;
+      display: flex; flex-direction: column; gap: 32px;
+    }
+
+    /* WR block */
+    .wr-block {
+      background: var(--crimson-dark);
+      border-top: 2px solid var(--gold);
+      padding: 20px 20px 16px;
+    }
+    .wr-age-group {
+      font-family: var(--font-body); font-weight: 600;
+      font-size: 0.82rem; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.7); margin-bottom: 6px;
+    }
+    .wr-label-text {
+      font-family: var(--font-body); font-size: 0.78rem;
+      color: rgba(255,255,255,0.5); margin-bottom: 6px;
+    }
+    .wr-value {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: 2rem; color: var(--gold);
+      letter-spacing: -0.02em; line-height: 1; margin-bottom: 2px;
+    }
+    .wr-holder {
+      font-family: var(--font-body); font-size: 0.8rem;
+      color: rgba(255,255,255,0.55); margin-top: 6px;
+    }
+    .wr-rules-link {
+      display: inline-flex; align-items: center; gap: 5px; margin-top: 14px;
+      font-family: var(--font-body); font-weight: 600; font-size: 0.8rem;
+      color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s;
+    }
+    .wr-rules-link:hover { color: var(--gold); }
+    .wr-rules-link svg { flex-shrink: 0; }
+
+    /* Gear list */
+    .gear-heading {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45); margin-bottom: 10px;
+    }
+    .gear-list {
+      list-style: none; display: flex; flex-direction: column; gap: 7px;
+    }
+    .gear-list li {
+      font-size: 0.88rem; color: rgba(255,255,255,0.6);
+      display: flex; gap: 10px; line-height: 1.4;
+    }
+    .gear-list li::before {
+      content: ''; display: block; width: 6px; height: 6px;
+      background: var(--gold); border-radius: 50%;
+      margin-top: 6px; flex-shrink: 0;
+    }
+    .event-row.field-event .gear-list li::before { background: var(--fire); }
+
+    /* Coaching highlight bar */
+    .coaching-bar {
+      background: rgba(10,211,255,0.07);
+      border-left: 3px solid var(--cyan);
+      padding: 16px 18px;
+    }
+    .coaching-bar-heading {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 10px;
+    }
+    .coaching-detail {
+      font-size: 0.84rem; color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+    .coaching-detail strong {
+      display: block; color: white;
+      font-family: var(--font-display); font-size: 0.95rem;
+      letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 4px;
+    }
+
+    /* ── CTA band ── */
+    .page-cta {
+      background: var(--crimson-deep); border-top: 3px solid var(--fire);
+      padding: 64px 0; text-align: center;
+    }
+    .page-cta h2 {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      text-transform: uppercase; color: white; margin-bottom: 14px;
+    }
+    .page-cta p { color: rgba(255,255,255,0.6); margin-bottom: 32px; font-size: 1rem; }
+    .btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-weight: 900; font-size: 0.85rem;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      padding: 14px 28px; transition: all 0.2s; border: 2px solid transparent; cursor: pointer;
+    }
+    .btn-gold { background: var(--gold); color: var(--crimson-dark); border-color: var(--gold); }
+    .btn-gold:hover { background: white; border-color: white; }
+    .btn-outline-white { background: none; color: white; border-color: rgba(255,255,255,0.5); }
+    .btn-outline-white:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── Footer ── */
+    .footer { background: var(--crimson-dark); padding: 60px 0 0; }
+    .footer-top { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 48px; }
+    .footer-brand { display: flex; align-items: flex-start; gap: 20px; }
+    .footer-brand img { height: 72px; width: auto; flex-shrink: 0; }
+    .footer-brand address {
+      font-style: normal; font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7;
+    }
+    .footer-brand address strong {
+      display: block; color: white; margin-bottom: 8px;
+      font-family: var(--font-display); font-size: 0.95rem;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .footer-brand address a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    .footer-brand address a:hover { color: var(--gold); }
+    .footer-connect h4 {
+      font-family: var(--font-display); font-weight: 900; font-size: 0.88rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-bottom: 16px;
+    }
+    .social-links { display: flex; gap: 10px; margin-bottom: 20px; }
+    .social-link {
+      display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.75); text-decoration: none; transition: all 0.2s;
+    }
+    .social-link:hover { background: var(--gold); color: var(--crimson-dark); border-color: var(--gold); }
+    .footer-vol-qld { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+    .footer-vol-qld a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    .footer-vol-qld a:hover { color: var(--gold); }
+    .footer-links-bar {
+      display: flex; flex-wrap: wrap; gap: 2px; justify-content: center;
+      border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 0;
+    }
+    .footer-links-bar a {
+      font-family: var(--font-display); font-weight: 900; font-size: 0.78rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45); text-decoration: none; padding: 5px 12px;
+      transition: color 0.2s;
+    }
+    .footer-links-bar a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08); padding: 16px 0;
+      font-size: 0.8rem; color: rgba(255,255,255,0.3);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .main-nav { display: none; }
+      .hamburger { display: flex; }
+      .event-row { grid-template-columns: 1fr; }
+      .event-body { padding: 40px 0 24px; }
+      .event-sidebar {
+        border-left: none; border-top: 1px solid rgba(255,255,255,0.07);
+        padding: 28px 0 40px; flex-direction: row; flex-wrap: wrap; gap: 24px;
+      }
+      .wr-block { flex: 1 1 220px; }
+      .gear-block { flex: 1 1 200px; }
+      .coaching-bar { flex: 1 1 100%; }
+      .footer-top { flex-direction: column; }
+      .footer-brand { flex-direction: column; gap: 12px; }
+    }
+    @media (max-width: 600px) {
+      .event-sidebar { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Utility bar ── -->
+<div class="utility-bar">
+  <div class="container">
+    <a href="#">Results</a>
+    <a href="#">Join</a>
+    <a href="#">Shop</a>
+  </div>
+</div>
+
+<!-- ── Header ── -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-area">
+      <img src="qma_logo_v2.svg" alt="Queensland Masters Athletics">
+      <div class="logo-text">
+        <strong>Queensland Masters Athletics</strong>
+        <span>Adult Track &amp; Field</span>
+      </div>
+    </a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <div class="nav-item has-dropdown">
+        <a href="#">Train</a>
+        <div class="dropdown">
+          <a href="#">Getting started</a>
+          <a href="find-a-session.html">Find a training session</a>
+          <a href="#">Meet a coach</a>
+          <a href="#">Set up a local squad</a>
+          <a href="#">Younger than 30?</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#">Compete</a>
+        <div class="dropdown">
+          <a href="#" class="link-join">Join QMA</a>
+          <a href="#">Calendar</a>
+          <a href="#">Membership benefits</a>
+          <a href="#">Results</a>
+          <a href="#">Records</a>
+          <a href="#">Online options</a>
+          <a href="#">Buy the uniform</a>
+          <a href="#">Am I ready?</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#">Learn</a>
+        <div class="dropdown">
+          <a href="#">How does track &amp; field work?</a>
+          <a href="the-events.html">The individual events</a>
+          <a href="#">Self-coaching resources</a>
+          <a href="#">Rules &amp; regulations</a>
+          <a href="#">Considerations for the older athlete</a>
+          <a href="#">Fitness, health &amp; injury</a>
+          <a href="meet-an-athlete.html">Meet an athlete</a>
+          <a href="#">Become a coach</a>
+          <a href="#">FAQ</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#">Volunteer</a>
+        <div class="dropdown">
+          <a href="#">Volunteer at the track</a>
+          <a href="#">Volunteer behind the scenes</a>
+          <a href="#">Become an accredited official</a>
+          <a href="#">Meet our volunteers</a>
+          <a href="#">Volunteering Queensland</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#">Locations</a>
+        <div class="dropdown">
+          <a href="#">Brisbane</a>
+          <a href="#">Gold Coast</a>
+          <a href="#">Sunshine Coast</a>
+          <a href="#">Toowoomba</a>
+          <a href="#">Far North Queensland</a>
+          <a href="#">Online &amp; Postal</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#">About</a>
+        <div class="dropdown">
+          <a href="#">The association</a>
+          <a href="#">History</a>
+          <a href="#">Management team</a>
+          <a href="#">News</a>
+          <a href="#">Our venues</a>
+          <a href="#">Minutes, reports &amp; publications</a>
+          <a href="#">Public liability</a>
+          <a href="#">Media</a>
+        </div>
+      </div>
+    </nav>
+
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Train <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#">Getting started</a>
+        <a href="#">Find a training session</a>
+        <a href="#">Meet a coach</a>
+        <a href="#">Set up a local squad</a>
+        <a href="#">Younger than 30?</a>
+      </div>
+    </div>
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Compete <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#" class="link-join">Join QMA</a>
+        <a href="#">Calendar</a>
+        <a href="#">Membership benefits</a>
+        <a href="#">Results</a>
+        <a href="#">Records</a>
+        <a href="#">Buy the uniform</a>
+        <a href="#">Am I ready?</a>
+      </div>
+    </div>
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Learn <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#">How does track &amp; field work?</a>
+        <a href="the-events.html">The individual events</a>
+        <a href="#">Self-coaching resources</a>
+        <a href="#">Rules &amp; regulations</a>
+        <a href="meet-an-athlete.html">Meet an athlete</a>
+        <a href="#">Become a coach</a>
+        <a href="#">FAQ</a>
+      </div>
+    </div>
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Volunteer <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#">Volunteer at the track</a>
+        <a href="#">Become an accredited official</a>
+        <a href="#">Meet our volunteers</a>
+        <a href="#">Volunteering Queensland</a>
+      </div>
+    </div>
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Locations <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#">Brisbane</a>
+        <a href="#">Gold Coast</a>
+        <a href="#">Sunshine Coast</a>
+        <a href="#">Toowoomba</a>
+        <a href="#">Far North Queensland</a>
+      </div>
+    </div>
+    <div class="mob-item">
+      <button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">About <span class="mob-chevron">›</span></button>
+      <div class="mob-sub">
+        <a href="#">The association</a>
+        <a href="#">History</a>
+        <a href="#">News</a>
+        <a href="#">Our venues</a>
+        <a href="#">Public liability</a>
+      </div>
+    </div>
+    <a href="#" class="mob-standalone">Results</a>
+    <a href="#" class="mob-standalone">Join</a>
+    <a href="#" class="mob-standalone">Shop</a>
+  </nav>
+</header>
+
+<!-- ── Page hero ── -->
+<section class="page-hero">
+  <div class="container">
+    <div class="section-label">Learn</div>
+    <h1 class="page-title">The events</h1>
+    <p>Track and field covers more ground than most people realise. From a 10-second sprint to a muddy cross-country course, here's what QMA members compete in, and why each event has its own devoted following.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     TRACK EVENTS
+     ════════════════════════════ -->
+<div class="container">
+  <div class="discipline-header">
+    <h2 class="discipline-heading">Track events</h2>
+  </div>
+</div>
+
+<!-- 100m -->
+<div class="container">
+  <article class="event-row" id="ev-100m">
+    <div class="event-body">
+      <div class="event-discipline-tag">Sprint</div>
+      <h3 class="event-name">100m</h3>
+      <p class="event-teaser">The most contested event in athletics and the simplest to understand: start, go, stop, check the clock. But the 100m is anything but simple to run well, and that's exactly the point. Clean block mechanics and a relaxed finish can unlock a half-second you didn't know you had, with no extra fitness required.</p>
+      <button class="read-more-btn" onclick="toggleEvent('ev-100m')" id="btn-ev-100m" aria-expanded="false">
+        Read more <span class="toggle-arrow">&#8595;</span>
+      </button>
+      <div class="event-full-bio" id="full-ev-100m">
+        <p>Masters 100m is one of the most competitive events on the program, and one of the most social. Every age group from M35 to M90+ fills a start list, because sprint speed is something humans seem reluctant to give up quietly. Age grading rewards those who hold it.</p>
+        <p>What changes as you get older isn't just top speed. It's the ability to sustain it. At 22 you run 10 metres of acceleration and 90 metres of maintenance. At 50, you're working harder just to keep your mechanics clean in the back straight. That gap between what your brain knows and what your body produces is the puzzle masters sprinters spend years trying to solve.</p>
+        <p>The blocks matter. Learn to use them properly. One session with a sprint coach will save you more time than any training block. The start itself is something you can work on in isolation, which means it rewards focused attention in a way that raw speed doesn't always.</p>
+        <blockquote>"I ran 11.4 at eighteen. I came back at fifty-three expecting to run 14 flat. First race I ran 13.1. I cried in the warm-down area. Actual tears. My wife thought I'd hurt myself."</blockquote>
+        <p>Competition in the 40-60 age bracket is fierce. These are athletes who were competitive in their twenties and have spent two decades quietly doing the work. A slower time on paper does not mean a slower competitor in the lane next to you. Everyone earns their place on that start line.</p>
+        <p>See the full technical rules for this event at <a href="https://worldathletics.org/disciplines/sprints/100-metres" target="_blank" rel="noopener">World Athletics</a>.</p>
+      </div>
+    </div>
+    <div class="event-sidebar">
+      <div class="wr-block">
+        <div class="wr-age-group">M80 World Record</div>
+        <div class="wr-value">14.60s</div>
+        <div class="wr-holder">WMA World Record</div>
+        <a href="https://worldathletics.org/disciplines/sprints/100-metres" class="wr-rules-link" target="_blank" rel="noopener">
+          World Athletics rules
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.5 3a.5.5 0 000 1H7.3L2.15 9.15a.5.5 0 00.7.7L8 4.7V8.5a.5.5 0 001 0v-5a.5.5 0 00-.5-.5h-5z"/></svg>
+        </a>
+      </div>
+      <div class="gear-block">
+        <h4 class="gear-heading">Gear you'll need</h4>
+        <ul class="gear-list">
+          <li>Sprint spikes (100m/200m spike plate)</li>
+          <li>Competition singlet and shorts</li>
+          <li>Training flats for warm-up</li>
+          <li>Starting blocks (provided at meets)</li>
+        </ul>
+      </div>
+      <div class="coaching-bar">
+        <div class="coaching-bar-heading">Masters coaching available</div>
+        <div class="coaching-detail">
+          <strong>Paul DeLuca, Brisbane</strong>
+          Wednesdays 6:00pm – 8:00pm<br>
+          Saturdays 8:00am – 10:00am<br>
+          QSAC, Nathan
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- 800m -->
+<div class="container">
+  <article class="event-row alt" id="ev-800m">
+    <div class="event-body">
+      <div class="event-discipline-tag">Middle Distance</div>
+      <h3 class="event-name">800m</h3>
+      <p class="event-teaser">Two laps, full commitment. The 800m sits in the cruellest part of the middle-distance spectrum: too short to pace yourself conservatively, too long to sprint blind from the gun. You have to commit to a pace that feels like a mistake and hold it for 120 seconds while your body argues with you the entire way.</p>
+      <button class="read-more-btn" onclick="toggleEvent('ev-800m')" id="btn-ev-800m" aria-expanded="false">
+        Read more <span class="toggle-arrow">&#8595;</span>
+      </button>
+      <div class="event-full-bio" id="full-ev-800m">
+        <p>What makes the 800m extraordinary for masters athletes is how well it rewards experience. Pacing judgment, race reading, knowing when to make a move and when to sit: these are skills that accumulate over years, and they can offset a meaningful chunk of the physiological decline in raw speed.</p>
+        <p>A well-paced 800m by a 55-year-old who has run the distance a hundred times will beat a faster 55-year-old who goes out too hard every single time. This is the event where the chess player in you gets to compete alongside the athlete.</p>
+        <p>Training for the 800m means building an aerobic base you might not expect for a race that lasts under two minutes. Intervals, tempo runs, and threshold work are your friends. So is learning to suffer with your mouth closed and your shoulders down. Tension is time lost.</p>
+        <blockquote>"The 800m is the event that keeps teaching you things. I've been running it for fifteen years and I'm still learning how to race it. That's what I love about it."</blockquote>
+        <p>Masters 800m races tend to be competitive right to the line. Position at the bell matters, especially in larger fields. Learning to run off someone's shoulder rather than fighting for space early is a tactical skill worth practising.</p>
+        <p>See the full technical rules at <a href="https://worldathletics.org/disciplines/middle-long/800-metres" target="_blank" rel="noopener">World Athletics</a>.</p>
+      </div>
+    </div>
+    <div class="event-sidebar">
+      <div class="wr-block">
+        <div class="wr-age-group">W65 World Record</div>
+        <div class="wr-value">2:42.18</div>
+        <div class="wr-holder">WMA World Record</div>
+        <a href="https://worldathletics.org/disciplines/middle-long/800-metres" class="wr-rules-link" target="_blank" rel="noopener">
+          World Athletics rules
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.5 3a.5.5 0 000 1H7.3L2.15 9.15a.5.5 0 00.7.7L8 4.7V8.5a.5.5 0 001 0v-5a.5.5 0 00-.5-.5h-5z"/></svg>
+        </a>
+      </div>
+      <div class="gear-block">
+        <h4 class="gear-heading">Gear you'll need</h4>
+        <ul class="gear-list">
+          <li>Middle-distance spikes (optional at masters level)</li>
+          <li>Racing flats as an alternative</li>
+          <li>Competition singlet and shorts</li>
+          <li>Training shoes for warm-up sets</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- 5000m -->
+<div class="container">
+  <article class="event-row" id="ev-5000m">
+    <div class="event-body">
+      <div class="event-discipline-tag">Distance</div>
+      <h3 class="event-name">5000m</h3>
+      <p class="event-teaser">Twelve and a half laps. The 5000m tests everything you have: aerobic engine, pacing discipline, race awareness, and the mental toughness to hold form when your lungs are arguing for an early exit. It also rewards the kind of steady, patient training that masters athletes tend to be better at than most.</p>
+      <button class="read-more-btn" onclick="toggleEvent('ev-5000m')" id="btn-ev-5000m" aria-expanded="false">
+        Read more <span class="toggle-arrow">&#8595;</span>
+      </button>
+      <div class="event-full-bio" id="full-ev-5000m">
+        <p>Distance running for masters athletes is a genuine bright spot. The research consistently shows that aerobic capacity declines more slowly than speed with age, which means the gap between a 60-year-old's 5000m age-grade and their 100m age-grade can be significant. Many masters distance runners are performing at their highest relative age grade in their sixties and even seventies.</p>
+        <p>The 5000m at a QMA meet is run on the track, which makes it a different experience to road or trail running. Lap counting matters. Pacing is something you can practice and refine over multiple competitions. You'll often race athletes from different age groups in the same heat, which makes positioning and effort management a live puzzle rather than a simple time trial.</p>
+        <p>Training for the 5000m at a masters level doesn't require huge volume. Consistency, easy running, and two quality sessions per week will cover most of what you need. The most common mistake new masters distance runners make is doing all of their running at the same moderate effort. Easy runs should be genuinely easy; hard runs should be hard. The middle ground is where fatigue accumulates without training response.</p>
+        <blockquote>"I took fifteen minutes off my 5000m personal best between the ages of fifty-two and fifty-seven. I hadn't run a step at fifty-one. The right coaching and a proper easy day changed everything."</blockquote>
+        <p>See the full technical rules at <a href="https://worldathletics.org/disciplines/middle-long/5000-metres" target="_blank" rel="noopener">World Athletics</a>.</p>
+      </div>
+    </div>
+    <div class="event-sidebar">
+      <div class="wr-block">
+        <div class="wr-age-group">M70 World Record</div>
+        <div class="wr-value">18:34.26</div>
+        <div class="wr-holder">WMA World Record</div>
+        <a href="https://worldathletics.org/disciplines/middle-long/5000-metres" class="wr-rules-link" target="_blank" rel="noopener">
+          World Athletics rules
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.5 3a.5.5 0 000 1H7.3L2.15 9.15a.5.5 0 00.7.7L8 4.7V8.5a.5.5 0 001 0v-5a.5.5 0 00-.5-.5h-5z"/></svg>
+        </a>
+      </div>
+      <div class="gear-block">
+        <h4 class="gear-heading">Gear you'll need</h4>
+        <ul class="gear-list">
+          <li>Distance spikes or racing flats</li>
+          <li>Competition singlet and shorts</li>
+          <li>Training shoes</li>
+          <li>GPS watch (training, not permitted in competition)</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Steeplechase -->
+<div class="container">
+  <article class="event-row alt" id="ev-steeple">
+    <div class="event-body">
+      <div class="event-discipline-tag">Distance / Obstacle</div>
+      <h3 class="event-name">Steeplechase</h3>
+      <p class="event-teaser">Running plus jumping plus water. The steeplechase is unlike anything else on the program. Over 3000 metres, athletes clear 28 fixed barriers and 7 water jumps, combining the aerobic demands of distance running with the technical skill of hurdle clearance. It's chaotic, exhilarating, and surprisingly addictive.</p>
+      <button class="read-more-btn" onclick="toggleEvent('ev-steeple')" id="btn-ev-steeple" aria-expanded="false">
+        Read more <span class="toggle-arrow">&#8595;</span>
+      </button>
+      <div class="event-full-bio" id="full-ev-steeple">
+        <p>Most people who love the steeplechase came to it sideways. A coach suggested it. They saw someone else running it and thought it looked like fun. A road runner needed something to train around an injury and found the barrier clearance easier on their hips than flat running. The steeplechase tends to find its athletes rather than the other way around.</p>
+        <p>The barriers in the steeplechase are heavier and more rigid than sprint hurdles. You don't knock them over if you hit them; they hit back. Technique matters. Most beginners step on top of the barrier rather than clearing it cleanly, which is perfectly legal and very sensible until you have the flexibility and confidence to flight over.</p>
+        <p>The water jump is the bit everyone worries about and the bit everyone ends up loving. Land short and you're getting wet. Land long and you're clear. With practice, you'll find the rhythm. Getting soaked in the first race is practically a rite of passage. After that, you'll be eyeing the jump from the back straight and lining it up early.</p>
+        <blockquote>"I fell in the water jump in my first race. Completely. Sat down in it. Got up, finished the race, signed up for the next one before I was dry."</blockquote>
+        <p>The steeple rewards distance runners with some spring in their legs. If you've run 5km in under 25 minutes and can clear a 76cm obstacle without panicking, you have the raw material to compete.</p>
+        <p>See the full technical rules at <a href="https://worldathletics.org/disciplines/middle-long/3000-metres-steeplechase" target="_blank" rel="noopener">World Athletics</a>.</p>
+      </div>
+    </div>
+    <div class="event-sidebar">
+      <div class="wr-block">
+        <div class="wr-age-group">W50 World Record</div>
+        <div class="wr-value">11:14.52</div>
+        <div class="wr-holder">WMA World Record, 3000m SC</div>
+        <a href="https://worldathletics.org/disciplines/middle-long/3000-metres-steeplechase" class="wr-rules-link" target="_blank" rel="noopener">
+          World Athletics rules
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.5 3a.5.5 0 000 1H7.3L2.15 9.15a.5.5 0 00.7.7L8 4.7V8.5a.5.5 0 001 0v-5a.5.5 0 00-.5-.5h-5z"/></svg>
+        </a>
+      </div>
+      <div class="gear-block">
+        <h4 class="gear-heading">Gear you'll need</h4>
+        <ul class="gear-list">
+          <li>Distance or cross-country spikes</li>
+          <li>Competition singlet and shorts</li>
+          <li>A willingness to get wet</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Hurdles -->
+<div class="container">
+  <article class="event-row" id="ev-hurdles">
+    <div class="event-body">
+      <div class="event-discipline-tag">Sprint / Technical</div>
+      <h3 class="event-name">Hurdles</h3>
+      <p class="event-teaser">Sprint speed meets technical precision. Hurdles events combine the explosive demands of sprinting with the discipline of a repeated, rhythmic movement pattern executed at full pace. Masters athletes compete over 80m, 100m, and 110m depending on age and gender, with barrier heights and spacing scaled accordingly.</p>
+      <button class="read-more-btn" onclick="toggleEvent('ev-hurdles')" id="btn-ev-hurdles" aria-expanded="false">
+        Read more <span class="toggle-arrow">&#8595;</span>
+      </button>
+      <div class="event-full-bio" id="full-ev-hurdles">
+        <p>One of the things the hurdles teaches you quickly is that being fast isn't enough. Stride pattern controls everything. The number of strides between hurdles is fixed by physics and your leg length, and once you've found your pattern, the work becomes about maintaining it under fatigue and making micro-adjustments at race pace. It's a puzzle you solve with your body, not your head.</p>
+        <p>Masters hurdle heights reduce progressively with age group, which is a genuine equaliser. A 65-year-old athlete competing over lower hurdles in a scaled distance is competing in an event calibrated to their physiology. It isn't a lesser version of the sprint hurdles. It's a different technical challenge with its own depth and its own world records worth chasing.</p>
+        <p>The 400m hurdles is also on the masters program for younger age groups. At 400m, the hurdles become a pacing and management event as much as a technical one. Running the flat 400m gives you the base; learning to clear ten barriers evenly spaced over that distance is the addition.</p>
+        <blockquote>"I was a flat 100m sprinter for twenty years. Someone suggested I try hurdles at fifty-eight. I'm slower over the flat now. I'm faster with the barriers than I was at thirty."</blockquote>
+        <p>See the full technical rules at <a href="https://worldathletics.org/disciplines/hurdles/100-metres-hurdles" target="_blank" rel="noopener">World Athletics</a>.</p>
+      </div>
+    </div>
+    <div class="event-sidebar">
+      <div class="wr-block">
+        <div class="wr-age-group">M60 World Record</div>
+        <div class="wr-value">14.23s</div>
+        <div class="wr-holder">WMA World Record, 80m hurdles</div>
+        <a href="https://worldathletics.org/disciplines/hurdles/100-metres-hurdles" class="wr-rules-link" target="_blank" rel="noopener">
+          World Athletics rules
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.5 3a.5.5 0 000 1H7.3L2.15 9.15a.5.5 0 00.7.7L8 4.7V8.5a.5.5 0 001 0v-5a.5.5 0 00-.5-.5h-5z"/></svg>
+        </a>
+      </div>
+      <div class="gear-block">
+        <h4 class="gear-heading">Gear you'll need</h4>
+        <ul class="gear-list">
+          <li>Sprint spikes (100m/200m plate)</li>
+          <li>Competition singlet and shorts</li>
+          <li>Hurdle barriers (provided at meets)</li>
+        </ul>
+      </div>
+      <div class="coaching-bar">
+        <div class="coaching-bar-heading">Masters coaching available</div>
+        <div class="coaching-detail">
+          <strong>Sandra Worthington, Gold Coast</strong>
+          Tuesdays 5:30pm – 7:00pm<br>
+          Gold Coast Athletics Centre, Carrara
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Field events heading -->
+<div class="container">
+  <div class="discipline-header">
+    <h2 class="discipline-heading">Field events</h2>
+  </div>
+</div>
+
+<!-- High Jump -->
+<div class="container">
+  <article class="event-row field-event alt" id="ev-highjump">
+    <div class="event-body">
+      <div class="event-discipline-tag">Jump</div>
+      <h3 class="event-name">High Jump</h3>
+      <p class="event-teaser">The Fosbury Flop revolutionised athletics in 1968 and it never gets old to watch. Running a curved approach at speed, planting, rotating backward over a bar, and landing on your shoulders: there is nothing natural about it, and yet once you've done it properly for the first time, the feeling is unlike anything else in sport.</p>
+      <button class="read-more-btn" onclick="toggleEvent('ev-highjump')" id="btn-ev-highjump" aria-expanded="false">
+        Read more <span class="toggle-arrow">&#8595;</span>
+      </button>
+      <div class="event-full-bio" id="full-ev-highjump">
+        <p>High jump is a technical event first and a power event second, which makes it more accessible than it looks. You don't need to be a physical specimen to clear a meaningful height. You need a consistent approach run, a clean plant, and the body awareness to arch your back at the right moment. All of that is coachable, and it improves faster with deliberate practice than most people expect.</p>
+        <p>Masters high jump is particularly interesting because the event selects for technical athletes. Pure leg power declines with age, but technique holds. Athletes who learn to jump correctly at forty are still improving at fifty because they're still finding efficiency gains in their approach and takeoff. The curve of improvement is longer than in most sprinting events.</p>
+        <p>Competition uses the progressive bar structure: the bar starts below your target and climbs. Three failures at the same height and you're out. It creates a match-play pressure that flat time events don't have. You're not racing the clock; you're making decisions in real time about which heights to enter and how to manage your attempts.</p>
+        <blockquote>"I cleared a height last season that I failed at forty times in my twenties. Different technique, different body awareness, same crossbar. It was the best moment I've had in sport."</blockquote>
+        <p>See the full technical rules at <a href="https://worldathletics.org/disciplines/jumps/high-jump" target="_blank" rel="noopener">World Athletics</a>.</p>
+      </div>
+    </div>
+    <div class="event-sidebar">
+      <div class="wr-block">
+        <div class="wr-age-group">W55 World Record</div>
+        <div class="wr-value">1.64m</div>
+        <div class="wr-holder">WMA World Record</div>
+        <a href="https://worldathletics.org/disciplines/jumps/high-jump" class="wr-rules-link" target="_blank" rel="noopener">
+          World Athletics rules
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.5 3a.5.5 0 000 1H7.3L2.15 9.15a.5.5 0 00.7.7L8 4.7V8.5a.5.5 0 001 0v-5a.5.5 0 00-.5-.5h-5z"/></svg>
+        </a>
+      </div>
+      <div class="gear-block">
+        <h4 class="gear-heading">Gear you'll need</h4>
+        <ul class="gear-list">
+          <li>High jump spikes (with heel spike)</li>
+          <li>Competition singlet and shorts</li>
+          <li>Landing mat and uprights (provided at meets)</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Pole Vault -->
+<div class="container">
+  <article class="event-row field-event" id="ev-polevault">
+    <div class="event-body">
+      <div class="event-discipline-tag">Jump</div>
+      <h3 class="event-name">Pole Vault</h3>
+      <p class="event-teaser">The most technical event in athletics, and by most accounts the most addictive. You sprint, plant a fibreglass pole, invert yourself completely, push off above the bar, and if you've done it right, land safely on the other side. It requires speed, strength, timing, courage, and a coach who knows what they're talking about.</p>
+      <button class="read-more-btn" onclick="toggleEvent('ev-polevault')" id="btn-ev-polevault" aria-expanded="false">
+        Read more <span class="toggle-arrow">&#8595;</span>
+      </button>
+      <div class="event-full-bio" id="full-ev-polevault">
+        <p>People assume the pole vault is dangerous, which is understandable given that you're swinging eight feet off the ground and then letting go. In practice, with proper coaching and the right equipment, it's a well-managed risk. Falls into the landing pit are part of learning. The pit is very forgiving. The technique is not, which is exactly why coaching is non-negotiable for beginners.</p>
+        <p>Masters pole vault has one of the most remarkable age-group depth charts in athletics. Athletes in their seventies are competing internationally at heights that would have been competitive at state level in the open category a generation ago. The event rewards athletes who have spent years refining their mechanics, and technique tends to hold better than raw speed.</p>
+        <p>The pole itself is a significant investment. Entry-level vaulting poles range from $400 to over $1,000. Different poles suit different weights, speeds, and grip heights. Your coach will help you find the right pole for your stage of development. Do not buy a pole without getting advice first; a pole that doesn't match your physical profile can be dangerous.</p>
+        <blockquote>"I started vaulting at fifty-one. My coach said I was a fast learner. I think what he meant was that I was willing to fall a lot without getting discouraged."</blockquote>
+        <p>If you have a gymnastics, diving, or climbing background, the body awareness you've built transfers immediately. If you don't, it will take a season to feel natural. It is worth it.</p>
+        <p>See the full technical rules at <a href="https://worldathletics.org/disciplines/jumps/pole-vault" target="_blank" rel="noopener">World Athletics</a>.</p>
+      </div>
+    </div>
+    <div class="event-sidebar">
+      <div class="wr-block">
+        <div class="wr-age-group">M70 World Record</div>
+        <div class="wr-value">3.80m</div>
+        <div class="wr-holder">WMA World Record</div>
+        <a href="https://worldathletics.org/disciplines/jumps/pole-vault" class="wr-rules-link" target="_blank" rel="noopener">
+          World Athletics rules
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.5 3a.5.5 0 000 1H7.3L2.15 9.15a.5.5 0 00.7.7L8 4.7V8.5a.5.5 0 001 0v-5a.5.5 0 00-.5-.5h-5z"/></svg>
+        </a>
+      </div>
+      <div class="gear-block">
+        <h4 class="gear-heading">Gear you'll need</h4>
+        <ul class="gear-list">
+          <li>Vaulting pole ($400 – $1,200+, buy with coach guidance)</li>
+          <li>Pole vault spikes or sprint spikes</li>
+          <li>Competition singlet and shorts</li>
+          <li>Landing pit and uprights (provided at meets)</li>
+        </ul>
+      </div>
+      <div class="coaching-bar">
+        <div class="coaching-bar-heading">Masters coaching available</div>
+        <div class="coaching-detail">
+          <strong>Chris Barker, Brisbane</strong>
+          Saturdays 8:00am – 11:00am<br>
+          QSAC, Nathan
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Hammer -->
+<div class="container">
+  <article class="event-row field-event alt" id="ev-hammer">
+    <div class="event-body">
+      <div class="event-discipline-tag">Throw</div>
+      <h3 class="event-name">Hammer</h3>
+      <p class="event-teaser">A steel ball connected to a handle by a wire, spun in a circle and released as fast as possible. The hammer is one of the few athletics events where being strong helps less than you'd think. Timing, balance, and the accumulation of angular momentum across multiple turns matter far more than brute force. It is, at its core, a dance.</p>
+      <button class="read-more-btn" onclick="toggleEvent('ev-hammer')" id="btn-ev-hammer" aria-expanded="false">
+        Read more <span class="toggle-arrow">&#8595;</span>
+      </button>
+      <div class="event-full-bio" id="full-ev-hammer">
+        <p>The hammer is unique in throws because the implement is in motion before the athlete begins turning. The preliminary swings build the system's energy, and then the rotations accelerate it. Released at the wrong moment and the hammer goes sideways. Released at exactly the right moment, you'll feel it travel in a way that no other throw quite matches.</p>
+        <p>Masters hammer is one of the most socially close-knit events on the program. Throwers tend to practice together, share equipment, and offer unsolicited technical feedback in the most affectionate possible way. The throwing circle is a community.</p>
+        <p>Hammer weights are scaled by age group and gender, so as you move into older age brackets the implement gets lighter. This is genuinely well-designed: it means the event stays competitive and technique keeps its importance relative to raw strength, which is exactly what an aging athlete needs.</p>
+        <blockquote>"I'd been a rugby prop for twenty years. I assumed throws would suit me because I was strong. My coach told me after two weeks that strength was the least of what I needed. He was right. Turned out I had no timing whatsoever."</blockquote>
+        <p>Your club will usually have training implements available. You don't need to buy your own until you've settled into the event and have a sense of what weight and build suits your technique.</p>
+        <p>See the full technical rules at <a href="https://worldathletics.org/disciplines/throws/hammer-throw" target="_blank" rel="noopener">World Athletics</a>.</p>
+      </div>
+    </div>
+    <div class="event-sidebar">
+      <div class="wr-block">
+        <div class="wr-age-group">M75 World Record</div>
+        <div class="wr-value">50.22m</div>
+        <div class="wr-holder">WMA World Record</div>
+        <a href="https://worldathletics.org/disciplines/throws/hammer-throw" class="wr-rules-link" target="_blank" rel="noopener">
+          World Athletics rules
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.5 3a.5.5 0 000 1H7.3L2.15 9.15a.5.5 0 00.7.7L8 4.7V8.5a.5.5 0 001 0v-5a.5.5 0 00-.5-.5h-5z"/></svg>
+        </a>
+      </div>
+      <div class="gear-block">
+        <h4 class="gear-heading">Gear you'll need</h4>
+        <ul class="gear-list">
+          <li>Throwing gloves (essential)</li>
+          <li>Flat-soled throwing shoes or trainers</li>
+          <li>Competition singlet and shorts</li>
+          <li>Training hammer (often available through club)</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Discus -->
+<div class="container">
+  <article class="event-row field-event" id="ev-discus">
+    <div class="event-body">
+      <div class="event-discipline-tag">Throw</div>
+      <h3 class="event-name">Discus</h3>
+      <p class="event-teaser">Technique over power. The discus is the throws event that most rewards patience, body awareness, and the willingness to do the same movement slowly until it's right before building speed into it. Athletes who come in expecting to muscle a disc across the field leave disappointed. Athletes who commit to learning the rotation leave hooked.</p>
+      <button class="read-more-btn" onclick="toggleEvent('ev-discus')" id="btn-ev-discus" aria-expanded="false">
+        Read more <span class="toggle-arrow">&#8595;</span>
+      </button>
+      <div class="event-full-bio" id="full-ev-discus">
+        <p>The discus throw is a rotational event like the hammer, but without the wire. The athlete holds the discus against their palm, winds across a 2.5-metre circle, rotates once and a half, and releases the disc at an angle calibrated for maximum aerodynamic travel. Get the release angle right and the disc floats. Get it wrong and it drops like a frisbee thrown badly at a birthday party.</p>
+        <p>Because the event is aerodynamic, conditions matter. A headwind, paradoxically, helps the discus travel further by generating lift. Tailwinds are harder. Experienced discus throwers develop a feel for conditions over years of competition, and adjust their release angle accordingly. It's the kind of nuanced knowledge that experienced masters athletes accumulate naturally.</p>
+        <p>Discus weights are scaled by age group. The open men's implement is 2kg; masters men's ranges down to 1kg at the oldest age groups. Women's implements are lighter still. This scaling keeps the event technical even as raw power diminishes, and means personal bests remain achievable deep into your athletic career.</p>
+        <blockquote>"I came from shot put. I thought the discus would be similar. It's completely different. The shot goes where you put it. The discus goes where physics decides, based on decisions you made 0.4 seconds earlier."</blockquote>
+        <p>See the full technical rules at <a href="https://worldathletics.org/disciplines/throws/discus-throw" target="_blank" rel="noopener">World Athletics</a>.</p>
+      </div>
+    </div>
+    <div class="event-sidebar">
+      <div class="wr-block">
+        <div class="wr-age-group">W65 World Record</div>
+        <div class="wr-value">36.44m</div>
+        <div class="wr-holder">WMA World Record</div>
+        <a href="https://worldathletics.org/disciplines/throws/discus-throw" class="wr-rules-link" target="_blank" rel="noopener">
+          World Athletics rules
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.5 3a.5.5 0 000 1H7.3L2.15 9.15a.5.5 0 00.7.7L8 4.7V8.5a.5.5 0 001 0v-5a.5.5 0 00-.5-.5h-5z"/></svg>
+        </a>
+      </div>
+      <div class="gear-block">
+        <h4 class="gear-heading">Gear you'll need</h4>
+        <ul class="gear-list">
+          <li>Training discus (own implement recommended, ~$40-$80)</li>
+          <li>Flat-soled throwing shoes or trainers</li>
+          <li>Competition singlet and shorts</li>
+          <li>Competition disci provided at meets</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Weight Throw -->
+<div class="container">
+  <article class="event-row field-event alt" id="ev-weight">
+    <div class="event-body">
+      <div class="event-discipline-tag">Throw / Masters</div>
+      <h3 class="event-name">Weight Throw</h3>
+      <p class="event-teaser">The weight throw is a masters athletics original: a heavy ball attached to a rigid handle, thrown from a circle using a single rotation or a full spin. It doesn't appear in open athletics, which means the entire history of the event belongs to masters athletes. Every world record in every age group is set by someone over thirty.</p>
+      <button class="read-more-btn" onclick="toggleEvent('ev-weight')" id="btn-ev-weight" aria-expanded="false">
+        Read more <span class="toggle-arrow">&#8595;</span>
+      </button>
+      <div class="event-full-bio" id="full-ev-weight">
+        <p>The weight throw implement is a ball, typically steel or brass, attached to a triangular or loop handle via a rigid connection. Unlike the hammer, there's no wire: the handle is solid, which gives the thrower more direct control but requires a different technique for generating speed. Most beginners start with a single rotation before progressing to multiple turns as their mechanics develop.</p>
+        <p>Implement weight varies by age group and gender. Masters men's weights typically range from 7.26kg in younger categories to 5kg and below in the oldest groups. Masters women throw lighter implements throughout. The scaling means that as raw strength declines, the event adapts, and personal bests in older age groups remain genuinely achievable.</p>
+        <p>The weight throw tends to suit athletes who have background in other throwing events, particularly hammer. The rotational mechanics are similar enough that crossover is common. Shot putters also move into the weight throw with reasonable success, though the technique adjustments are more significant.</p>
+        <blockquote>"There's something satisfying about an event that has no open category. No one runs the weight throw for a national open team. It was designed specifically for us. I find that unexpectedly motivating."</blockquote>
+        <p>For full technical rules see the <a href="https://world-masters-athletics.org/rules-regulations/" target="_blank" rel="noopener">World Masters Athletics rules and regulations</a>.</p>
+      </div>
+    </div>
+    <div class="event-sidebar">
+      <div class="wr-block">
+        <div class="wr-age-group">M60 World Record</div>
+        <div class="wr-value">19.38m</div>
+        <div class="wr-holder">WMA World Record</div>
+        <a href="https://world-masters-athletics.org/rules-regulations/" class="wr-rules-link" target="_blank" rel="noopener">
+          WMA rules
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.5 3a.5.5 0 000 1H7.3L2.15 9.15a.5.5 0 00.7.7L8 4.7V8.5a.5.5 0 001 0v-5a.5.5 0 00-.5-.5h-5z"/></svg>
+        </a>
+      </div>
+      <div class="gear-block">
+        <h4 class="gear-heading">Gear you'll need</h4>
+        <ul class="gear-list">
+          <li>Throwing gloves (recommended)</li>
+          <li>Flat-soled throwing shoes or trainers</li>
+          <li>Competition singlet and shorts</li>
+          <li>Training weight (often available through club)</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Cross Country heading -->
+<div class="container">
+  <div class="discipline-header">
+    <h2 class="discipline-heading">Cross country</h2>
+  </div>
+</div>
+
+<!-- Cross Country -->
+<div class="container">
+  <article class="event-row" id="ev-xc">
+    <div class="event-body">
+      <div class="event-discipline-tag">Cross Country</div>
+      <h3 class="event-name">Cross Country</h3>
+      <p class="event-teaser">Mud, hills, and the closest community in masters athletics. Cross country running strips everything back: no lanes, no clock on the track, no smooth surface. Just a course, a field of athletes, and the singular challenge of getting to the finish line before the people around you. Masters cross country is one of the most welcoming entry points into competitive athletics.</p>
+      <button class="read-more-btn" onclick="toggleEvent('ev-xc')" id="btn-ev-xc" aria-expanded="false">
+        Read more <span class="toggle-arrow">&#8595;</span>
+      </button>
+      <div class="event-full-bio" id="full-ev-xc">
+        <p>Cross country is unusual in the QMA calendar because it's run on grass or trail courses rather than a track. That changes the nature of the competition. Terrain management, cornering, hill economy, and the ability to run on uneven surfaces become as important as raw fitness. Athletes who have spent years running on roads often find their first cross-country race unexpectedly hard on the legs for reasons they can't immediately explain. The instability is different, and the body knows it.</p>
+        <p>Masters cross country events at national and world level use standardised course distances scaled by age group and gender, so the comparison across categories is meaningful. At club and regional level in Queensland, courses vary, and that variability is part of the fun.</p>
+        <p>There is something particular about cross-country culture that's worth naming. It's informal in a way that track athletics isn't. Athletes warm up together on the course, share notes about the mud and the camber, and help each other through the difficult sections during the race itself. Lapping and being lapped coexist without awkwardness. It's a format that invites everyone in.</p>
+        <blockquote>"I finished last in my first cross-country race and people cheered as loud as they did for the winner. I've been doing it for nine years. It's still my favourite event."</blockquote>
+        <p>You don't need to be a fast runner to get started. You need a pair of cross-country spikes, a willingness to get muddy, and the ability to run for somewhere between 20 and 35 minutes depending on your age group and distance.</p>
+        <p>See the full technical rules at <a href="https://worldathletics.org/disciplines/cross-country-running/cross-country" target="_blank" rel="noopener">World Athletics</a>.</p>
+      </div>
+    </div>
+    <div class="event-sidebar">
+      <div class="wr-block">
+        <div class="wr-age-group">W70 Championship Best</div>
+        <div class="wr-value">25:48</div>
+        <div class="wr-holder">WMA XC Championships, 6km course</div>
+        <a href="https://worldathletics.org/disciplines/cross-country-running/cross-country" class="wr-rules-link" target="_blank" rel="noopener">
+          World Athletics rules
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.5 3a.5.5 0 000 1H7.3L2.15 9.15a.5.5 0 00.7.7L8 4.7V8.5a.5.5 0 001 0v-5a.5.5 0 00-.5-.5h-5z"/></svg>
+        </a>
+      </div>
+      <div class="gear-block">
+        <h4 class="gear-heading">Gear you'll need</h4>
+        <ul class="gear-list">
+          <li>Cross-country spikes (longer pins, 9-12mm)</li>
+          <li>Trail shoes as an alternative on firm ground</li>
+          <li>Competition singlet and shorts</li>
+          <li>Old clothes you don't mind washing twice</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- ── CTA ── -->
+<section class="page-cta">
+  <div class="container">
+    <h2>Not sure which event suits you?</h2>
+    <p>Try our event finder quiz, or come to a session and talk to a coach. There's more flexibility than you might expect.</p>
+    <div class="btn-row">
+      <a href="index.html#quiz" class="btn btn-gold">Find your event</a>
+      <a href="#" class="btn btn-outline-white">Find a training session</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="qma_logo_v2.svg" alt="Queensland Masters Athletics">
+        <address>
+          <strong>Contact Us</strong>
+          Queensland Masters Athletics Association<br>
+          PO Box 474, Sunnybank QLD 4109<br>
+          Primary Venue: QSAC Stadium, Kessells Road, Nathan<br>
+          ABN: 18 371 441 363<br>
+          <a href="mailto:secretary@qldmastersathletics.org.au">secretary@qldmastersathletics.org.au</a>
+        </address>
+      </div>
+      <div class="footer-connect">
+        <h4>Connect Online</h4>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.585.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+        <p class="footer-vol-qld">QMA is a member of <a href="#">Volunteering Queensland</a></p>
+        <p class="footer-vol-qld" style="margin-top:6px;">Action photography by <a href="https://www.joharlow.com.au" target="_blank" rel="noopener">Jo Harlow</a></p>
+      </div>
+    </div>
+    <nav class="footer-links-bar" aria-label="Footer links">
+      <a href="#">Join</a>
+      <a href="#">Compete</a>
+      <a href="#">Newsletter</a>
+      <a href="#">Shop</a>
+      <a href="#">Public liability</a>
+      <a href="#">Privacy policy</a>
+      <a href="#">Terms and conditions</a>
+      <a href="#">Website terms of use</a>
+      <a href="#">Report website issue</a>
+    </nav>
+    <div class="footer-bottom">
+      <span>© 2026 Queensland Masters Athletics Association</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburgerBtn');
+    const isOpen = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+  }
+
+  function toggleMobileSubmenu(btn) {
+    const sub = btn.nextElementSibling;
+    const isOpen = sub.classList.toggle('open');
+    btn.classList.toggle('active', isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
+  }
+
+  function toggleEvent(articleId) {
+    const article = document.getElementById(articleId);
+    const bio = document.getElementById('full-' + articleId);
+    const btn = document.getElementById('btn-' + articleId);
+    const isOpen = bio.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
+    btn.querySelector('.toggle-arrow').innerHTML = isOpen ? '&#8593;' : '&#8595;';
+    btn.childNodes[0].textContent = isOpen ? 'Read less ' : 'Read more ';
+    if (isOpen) {
+      article.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+</script>
+
+</body>
+</html>

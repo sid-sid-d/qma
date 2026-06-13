@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-label="Queensland Masters Athletics">
+  <title>Queensland Masters Athletics</title>
+  <circle cx="110" cy="110" r="100" fill="none" stroke="#FCA311" stroke-width="4"/>
+  <text x="110" y="158"
+        font-family="'Saira Condensed', 'Arial Narrow', Impact, sans-serif"
+        font-weight="900" font-size="130"
+        fill="#FCA311" text-anchor="middle">Q</text>
+</svg>
