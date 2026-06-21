@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Records — Queensland Masters Athletics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Saira+Condensed:wght@900&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --crimson: #5A0C26; --crimson-dark: #3A0718; --crimson-deep: #200510;
+      --gold: #FCA311; --fire: #FF1F1F; --cyan: #0AD3FF; --off-white: #F4F1EE;
+      --font-display: 'Saira Condensed', Impact, sans-serif;
+      --font-body: 'Figtree', -apple-system, sans-serif;
+    }
+    body { font-family: var(--font-body); background: var(--crimson-deep); color: white; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Utility bar ── */
+    .utility-bar { background: var(--crimson-deep); padding: 7px 0; }
+    .utility-bar .container { display: flex; justify-content: flex-end; gap: 28px; }
+    .utility-bar a { font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.2s; }
+    .utility-bar a:hover { color: white; }
+
+    /* ── Header ── */
+    .header { background: var(--crimson-dark); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; max-width: 1200px; margin: 0 auto; }
+    .logo-area { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .logo-area img { height: 60px; width: auto; }
+    .logo-text strong { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: white; letter-spacing: 0.06em; text-transform: uppercase; }
+    .logo-text span { font-size: 0.68rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; }
+    .main-nav { display: flex; }
+    .nav-item { position: relative; }
+    .nav-item > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.82); text-decoration: none; padding: 18px 14px; position: relative; transition: color 0.2s; }
+    .nav-item > a::after { content: ''; position: absolute; bottom: 0; left: 14px; right: 14px; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.2s; }
+    .nav-item:hover > a { color: var(--gold); }
+    .nav-item:hover > a::after { transform: scaleX(1); }
+    .dropdown { position: absolute; top: 100%; left: 0; min-width: 300px; background: var(--crimson-dark); border-top: 3px solid var(--fire); box-shadow: 0 8px 24px rgba(0,0,0,0.4); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.2s, transform 0.2s, visibility 0.2s; z-index: 200; }
+    .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-item:last-child .dropdown { left: auto; right: 0; }
+    .dropdown a { display: block; font-family: var(--font-display); font-weight: 600; font-size: 0.88rem; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.68); text-decoration: none; padding: 12px 22px; transition: color 0.15s, background 0.15s, padding-left 0.15s; border-bottom: 1px solid rgba(255,255,255,0.06); white-space: nowrap; }
+    .dropdown a:last-child { border-bottom: none; }
+    .dropdown a.link-join { color: var(--cyan); }
+    .dropdown a:hover { color: var(--gold); background: rgba(252,163,17,0.07); padding-left: 28px; }
+    .has-dropdown > a::before { content: '▾'; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; color: var(--gold); opacity: 0.6; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 26px; height: 3px; background: var(--gold); }
+    .mobile-nav { display: none; background: var(--crimson-dark); padding: 8px 24px 20px; }
+    .mobile-nav.open { display: block; }
+    .mob-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .mob-top { display: flex; justify-content: space-between; align-items: center; width: 100%; background: none; border: none; padding: 14px 0; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.82); cursor: pointer; text-align: left; transition: color 0.2s; }
+    .mob-top:hover, .mob-top.active { color: var(--gold); }
+    .mob-chevron { display: inline-block; transition: transform 0.25s; }
+    .mob-top.active .mob-chevron { transform: rotate(90deg); }
+    .mob-sub { display: none; padding-bottom: 10px; }
+    .mob-sub.open { display: block; }
+    .mob-sub a { display: block; padding: 8px 0 8px 16px; font-family: var(--font-display); font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: rgba(255,255,255,0.5); transition: color 0.15s; text-decoration: none; }
+    .mob-sub a:hover { color: var(--gold); }
+    .mob-standalone { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.82); padding: 14px 0; border-top: 1px solid rgba(255,255,255,0.07); transition: color 0.2s; text-decoration: none; }
+    .mob-standalone:hover { color: var(--gold); }
+
+    /* ── Page hero ── */
+    .page-hero { background: var(--crimson-dark); padding: 80px 0 64px; border-bottom: 3px solid var(--fire); position: relative; overflow: hidden; }
+    .page-hero::after { content: ''; position: absolute; right: -60px; top: -40px; width: 340px; height: 340px; border: 2px solid rgba(252,163,17,0.08); border-radius: 50%; pointer-events: none; }
+    .section-label { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 900; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .section-label::before { content: ''; display: block; width: 28px; height: 2px; background: var(--fire); }
+    .page-title { font-family: var(--font-display); font-weight: 900; font-size: clamp(2.8rem, 5vw, 5rem); color: white; text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.92; margin: 4px 0 24px; }
+    .page-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.62); max-width: 580px; line-height: 1.7; }
+
+    /* ── Records section ── */
+    .records-section { padding: 60px 0 80px; }
+    .records-layout { display: grid; grid-template-columns: 1fr 300px; gap: 48px; align-items: start; }
+
+    /* Gender toggle */
+    .gender-toggle { display: flex; gap: 0; margin-bottom: 32px; width: fit-content; border: 1px solid rgba(255,255,255,0.12); }
+    .gender-btn { font-family: var(--font-display); font-weight: 900; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 24px; border: none; cursor: pointer; transition: all 0.2s; background: none; color: rgba(255,255,255,0.45); }
+    .gender-btn.active { background: var(--gold); color: var(--crimson-dark); cursor: default; }
+    .gender-btn.disabled { color: rgba(255,255,255,0.2); cursor: not-allowed; }
+
+    /* Category tabs */
+    .cat-tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 24px; }
+    .cat-tab { font-family: var(--font-display); font-weight: 900; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border: 1px solid rgba(255,255,255,0.12); background: none; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; }
+    .cat-tab:hover { color: white; border-color: rgba(255,255,255,0.3); }
+    .cat-tab.active { background: var(--crimson-dark); color: white; border-color: var(--fire); }
+    .cat-tab[disabled] { color: rgba(255,255,255,0.2); cursor: default; border-style: dashed; }
+
+    /* Event pills */
+    .event-pills-wrap { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .event-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .event-pill { font-family: var(--font-display); font-size: 0.78rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.18s; }
+    .event-pill:hover { color: white; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.07); }
+    .event-pill.active { background: var(--crimson); color: white; border-color: var(--fire); }
+
+    /* Records table */
+    .records-table-wrap { overflow-x: auto; }
+    .current-event-label { font-family: var(--font-display); font-weight: 900; font-size: 1.4rem; text-transform: uppercase; color: white; letter-spacing: -0.01em; margin-bottom: 16px; }
+    .current-event-label .ev-cat { color: var(--gold); }
+    .records-table { width: 100%; border-collapse: collapse; }
+    .records-table th { font-family: var(--font-display); font-weight: 900; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); padding: 10px 16px; text-align: left; border-bottom: 2px solid var(--fire); white-space: nowrap; }
+    .records-table td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.92rem; vertical-align: middle; }
+    .records-table tr:last-child td { border-bottom: none; }
+    .records-table tr:hover td { background: rgba(255,255,255,0.03); }
+    .age-group { font-family: var(--font-display); font-weight: 900; font-size: 1rem; color: white; letter-spacing: 0.04em; }
+    .athlete-name { color: rgba(255,255,255,0.8); }
+    .rec-year { color: rgba(255,255,255,0.35); font-size: 0.85rem; }
+    .rec-perf { font-family: var(--font-display); font-weight: 900; font-size: 1.05rem; color: white; letter-spacing: 0.02em; }
+    .rec-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 900; border-radius: 2px; margin-left: 6px; vertical-align: middle; }
+    .badge-a { background: rgba(10,211,255,0.12); color: var(--cyan); border: 1px solid rgba(10,211,255,0.3); }
+    .badge-w { background: rgba(252,163,17,0.12); color: var(--gold); border: 1px solid rgba(252,163,17,0.3); }
+    .no-records { padding: 40px 0; color: rgba(255,255,255,0.3); font-size: 0.9rem; }
+
+    /* Legend */
+    .records-legend { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+    .legend-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 900; border-radius: 2px; }
+
+    /* Timing note */
+    .timing-note { background: rgba(255,255,255,0.03); border-left: 3px solid rgba(252,163,17,0.3); padding: 14px 18px; margin-bottom: 28px; font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+    /* Sidebar */
+    .sidebar-card { background: var(--crimson-dark); border-top: 3px solid var(--gold); padding: 28px; margin-bottom: 20px; }
+    .sidebar-card h3 { font-family: var(--font-display); font-weight: 900; font-size: 0.88rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .sidebar-card p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.6; margin-bottom: 14px; }
+    .sidebar-card p:last-child { margin-bottom: 0; }
+    .sidebar-link { display: block; color: rgba(255,255,255,0.55); font-size: 0.85rem; font-family: var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.15s, padding-left 0.15s; }
+    .sidebar-link:hover { color: var(--gold); padding-left: 8px; }
+    .sidebar-link:last-child { border-bottom: none; }
+
+    /* Footer */
+    .footer { background: var(--crimson-dark); padding: 60px 0 0; }
+    .footer-top { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 48px; }
+    .footer-brand { display: flex; align-items: flex-start; gap: 20px; }
+    .footer-brand img { height: 72px; width: auto; flex-shrink: 0; }
+    .footer-brand address { font-style: normal; font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+    .footer-brand address strong { display: block; color: white; margin-bottom: 8px; font-family: var(--font-display); font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .footer-brand address a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    .footer-brand address a:hover { color: var(--gold); }
+    .footer-connect h4 { font-family: var(--font-display); font-weight: 900; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+    .social-links { display: flex; gap: 10px; margin-bottom: 20px; }
+    .social-link { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.75); text-decoration: none; transition: all 0.2s; }
+    .social-link:hover { background: var(--gold); color: var(--crimson-dark); border-color: var(--gold); }
+    .footer-vol-qld { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+    .footer-vol-qld a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    .footer-vol-qld a:hover { color: var(--gold); }
+    .footer-links-bar { display: flex; flex-wrap: wrap; gap: 2px; justify-content: center; border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 0; }
+    .footer-links-bar a { font-family: var(--font-display); font-weight: 900; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; padding: 5px 12px; transition: color 0.2s; }
+    .footer-links-bar a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 16px 0; font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+
+    @media (max-width: 960px) { .main-nav { display: none; } .hamburger { display: flex; } .footer-top { flex-direction: column; } .footer-brand { flex-direction: column; gap: 12px; } }
+    @media (max-width: 860px) { .records-layout { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { .container { padding: 0 20px; } .page-hero { padding: 60px 0 40px; } }
+  </style>
+</head>
+<body>
+
+<div class="utility-bar">
+  <div class="container">
+    <a href="results.html">Results</a>
+    <a href="join.html">Join</a>
+    <a href="#">Shop</a>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-area">
+      <img src="qma_logo_v2.svg" alt="Queensland Masters Athletics">
+      <div class="logo-text">
+        <strong>Queensland Masters Athletics</strong>
+        <span>Adult Track &amp; Field</span>
+      </div>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <div class="nav-item has-dropdown"><a href="#">Train</a><div class="dropdown"><a href="getting-started.html">Getting started</a><a href="how-tf-works.html">How does T&amp;F work?</a><a href="find-a-session.html">Find a training session</a><a href="the-events.html">The individual events</a><a href="meet-the-coaches.html">Meet the coaches</a><a href="become-a-coach.html">Become a coach</a><a href="am-i-ready.html">Am I ready?</a><a href="younger-than-30.html">Younger than 30?</a><a href="athlete-wellbeing.html">Athlete wellbeing</a></div></div>
+      <div class="nav-item has-dropdown"><a href="#">Compete</a><div class="dropdown"><a href="join.html" class="link-join">Join QMA</a><a href="calendar.html">Calendar</a><a href="membership-benefits.html">Membership benefits</a><a href="results.html">Results</a><a href="records.html">Records</a><a href="online-options.html">Online options</a><a href="rules.html">Rules &amp; regulations</a><a href="info-for-students.html">Info for students</a></div></div>
+      <div class="nav-item has-dropdown"><a href="#">Learn</a><div class="dropdown"><a href="self-coaching.html">Self-coaching resources</a><a href="rules.html">Rules &amp; regulations</a><a href="considerations-older-athlete.html">Considerations for the older athlete</a><a href="fitness-health-injury.html">Fitness, health &amp; injury</a><a href="meet-an-athlete.html">Meet an athlete</a><a href="the-events.html">The individual events</a></div></div>
+      <div class="nav-item has-dropdown"><a href="#">Volunteer</a><div class="dropdown"><a href="volunteer-track.html">At the track</a><a href="volunteer-behind-scenes.html">Behind the scenes</a><a href="become-official.html">Become an accredited official</a><a href="meet-our-volunteers.html">Meet our volunteers</a><a href="set-up-squad.html">Set up a local squad</a><a href="https://www.volunteeringqueensland.org.au" target="_blank" rel="noopener">Volunteering Queensland</a></div></div>
+      <div class="nav-item has-dropdown"><a href="#">Locations</a><div class="dropdown"><a href="location-brisbane.html">Brisbane</a><a href="location-gold-coast.html">Gold Coast</a><a href="location-sunshine-coast.html">Sunshine Coast</a><a href="location-toowoomba.html">Toowoomba</a><a href="location-fnq.html">Far North Queensland</a></div></div>
+      <div class="nav-item has-dropdown"><a href="#">About</a><div class="dropdown"><a href="the-association.html">The association</a><a href="history.html">History</a><a href="management-team.html">Management team</a><a href="news.html">News</a><a href="our-venues.html">Our venues</a><a href="minutes-reports.html">Minutes, reports &amp; publications</a><a href="public-liability.html">Public liability</a><a href="media.html">Media</a></div></div>
+    </nav>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mob-item"><button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Train <span class="mob-chevron">›</span></button><div class="mob-sub"><a href="getting-started.html">Getting started</a><a href="how-tf-works.html">How does T&amp;F work?</a><a href="find-a-session.html">Find a training session</a><a href="the-events.html">The individual events</a><a href="meet-the-coaches.html">Meet the coaches</a><a href="become-a-coach.html">Become a coach</a><a href="am-i-ready.html">Am I ready?</a><a href="younger-than-30.html">Younger than 30?</a><a href="athlete-wellbeing.html">Athlete wellbeing</a></div></div>
+    <div class="mob-item"><button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Compete <span class="mob-chevron">›</span></button><div class="mob-sub"><a href="join.html" class="link-join">Join QMA</a><a href="calendar.html">Calendar</a><a href="membership-benefits.html">Membership benefits</a><a href="results.html">Results</a><a href="records.html">Records</a><a href="online-options.html">Online options</a><a href="rules.html">Rules &amp; regulations</a><a href="info-for-students.html">Info for students</a></div></div>
+    <div class="mob-item"><button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Learn <span class="mob-chevron">›</span></button><div class="mob-sub"><a href="self-coaching.html">Self-coaching resources</a><a href="rules.html">Rules &amp; regulations</a><a href="considerations-older-athlete.html">Considerations for the older athlete</a><a href="fitness-health-injury.html">Fitness, health &amp; injury</a><a href="meet-an-athlete.html">Meet an athlete</a><a href="the-events.html">The individual events</a></div></div>
+    <div class="mob-item"><button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Volunteer <span class="mob-chevron">›</span></button><div class="mob-sub"><a href="volunteer-track.html">At the track</a><a href="volunteer-behind-scenes.html">Behind the scenes</a><a href="become-official.html">Become an accredited official</a><a href="meet-our-volunteers.html">Meet our volunteers</a><a href="set-up-squad.html">Set up a local squad</a><a href="https://www.volunteeringqueensland.org.au" target="_blank" rel="noopener">Volunteering Queensland</a></div></div>
+    <div class="mob-item"><button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">Locations <span class="mob-chevron">›</span></button><div class="mob-sub"><a href="location-brisbane.html">Brisbane</a><a href="location-gold-coast.html">Gold Coast</a><a href="location-sunshine-coast.html">Sunshine Coast</a><a href="location-toowoomba.html">Toowoomba</a><a href="location-fnq.html">Far North Queensland</a></div></div>
+    <div class="mob-item"><button class="mob-top" onclick="toggleMobileSubmenu(this)" aria-expanded="false">About <span class="mob-chevron">›</span></button><div class="mob-sub"><a href="the-association.html">The association</a><a href="history.html">History</a><a href="management-team.html">Management team</a><a href="news.html">News</a><a href="our-venues.html">Our venues</a><a href="minutes-reports.html">Minutes, reports &amp; publications</a><a href="public-liability.html">Public liability</a><a href="media.html">Media</a></div></div>
+    <a href="results.html" class="mob-standalone">Results</a>
+    <a href="join.html" class="mob-standalone">Join</a>
+    <a href="#" class="mob-standalone">Shop</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-label">Compete</div>
+    <h1 class="page-title">Queensland<br>Records</h1>
+    <p>QMA state records across all track and field disciplines. Updated September 2024.</p>
+  </div>
+</section>
+
+<section class="records-section">
+  <div class="container">
+    <div class="records-layout">
+
+      <div class="records-main">
+
+        <div class="gender-toggle" role="group" aria-label="Select gender">
+          <button class="gender-btn active" id="btnWomen" onclick="switchGender('women')">Women's</button>
+          <button class="gender-btn" id="btnMen" onclick="switchGender('men')">Men's</button>
+        </div>
+
+        <div class="timing-note">
+          Record times up to and including 800m must be set with Electronic Timing. A Wind Gauge reading is required for sprints and jumps. 3-watch timing is required for distances over 800m.
+        </div>
+
+        <div class="cat-tabs" role="tablist" aria-label="Event category" id="catTabs"></div>
+
+        <div class="event-pills-wrap">
+          <div class="event-pills" id="eventPills"></div>
+        </div>
+
+        <div class="current-event-label" id="currentEventLabel"></div>
+
+        <div class="records-table-wrap">
+          <table class="records-table" aria-label="Records table">
+            <thead>
+              <tr>
+                <th scope="col">Age Group</th>
+                <th scope="col">Athlete</th>
+                <th scope="col">Year</th>
+                <th scope="col">Performance</th>
+              </tr>
+            </thead>
+            <tbody id="recordsBody"></tbody>
+          </table>
+        </div>
+
+        <div class="records-legend">
+          <div class="legend-item">
+            <span class="legend-badge badge-a">A</span>
+            Australian record at time of setting
+          </div>
+          <div class="legend-item">
+            <span class="legend-badge badge-w">W</span>
+            World record / wind-assisted
+          </div>
+        </div>
+
+      </div>
+
+      <aside>
+        <div class="sidebar-card">
+          <h3>Records as at</h3>
+          <p>Stadium records current at <strong>17 September 2024</strong>. Out-of-stadium records current at <strong>23 June 2024</strong>.</p>
+          <p>Contact the secretary to submit a ratified performance for consideration.</p>
+          <a href="mailto:secretary@qldmastersathletics.org.au" class="sidebar-link">Submit a record claim</a>
+        </div>
+        <div class="sidebar-card">
+          <h3>Other records</h3>
+          <a href="#" class="sidebar-link">AMA Championship records</a>
+          <a href="#" class="sidebar-link">AMA Winter Throws records</a>
+          <a href="#" class="sidebar-link">Oceania records</a>
+          <a href="#" class="sidebar-link">Asia-Pacific Games records</a>
+          <a href="https://www.mastersrankings.com" target="_blank" rel="noopener" class="sidebar-link">World masters rankings ↗</a>
+        </div>
+        <div class="sidebar-card">
+          <h3>Related</h3>
+          <a href="results.html" class="sidebar-link">Competition results</a>
+          <a href="calendar.html" class="sidebar-link">Upcoming events</a>
+          <a href="rules.html" class="sidebar-link">Rules &amp; regulations</a>
+          <a href="the-events.html" class="sidebar-link">Individual events guide</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="qma_logo_v2.svg" alt="Queensland Masters Athletics">
+        <address>
+          <strong>Contact Us</strong>
+          Queensland Masters Athletics Association<br>
+          PO Box 474, Sunnybank QLD 4109<br>
+          Primary Venue: QSAC Stadium, Kessells Road, Nathan<br>
+          ABN: 18 371 441 363<br>
+          <a href="mailto:secretary@qldmastersathletics.org.au">secretary@qldmastersathletics.org.au</a>
+        </address>
+      </div>
+      <div class="footer-connect">
+        <h4>Connect Online</h4>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.585.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="#" class="social-link" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="#" class="social-link" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+        </div>
+        <p class="footer-vol-qld">QMA is a member of <a href="#">Volunteering Queensland</a></p>
+        <p class="footer-vol-qld" style="margin-top:6px;">Action photography by <a href="https://www.joharlow.com.au" target="_blank" rel="noopener">Jo Harlow</a></p>
+      </div>
+    </div>
+    <nav class="footer-links-bar" aria-label="Footer links">
+      <a href="join.html">Join</a><a href="#">Compete</a><a href="#">Newsletter</a><a href="#">Shop</a><a href="public-liability.html">Public liability</a><a href="#">Privacy policy</a><a href="#">Terms and conditions</a><a href="#">Website terms of use</a><a href="#">Report website issue</a>
+    </nav>
+    <div class="footer-bottom"><span>&copy; 2026 Queensland Masters Athletics Association</span></div>
+  </div>
+</footer>
+
+<script>
+  /* ── Mobile nav ── */
+  function toggleMenu() {
+    const n = document.getElementById('mobileNav');
+    const b = document.getElementById('hamburgerBtn');
+    const open = n.classList.toggle('open');
+    b.setAttribute('aria-expanded', open);
+  }
+  function toggleMobileSubmenu(btn) {
+    const sub = btn.nextElementSibling;
+    const open = sub.classList.toggle('open');
+    btn.classList.toggle('active', open);
+    btn.setAttribute('aria-expanded', open);
+  }
+
+  /* ── Records data (Women's) ── */
+  const WOMEN = {
+    track: {
+      label: 'Track',
+      events: {
+        '60m': [
+          ['W30','Fiona Cullen',2011,'7.95','A'],
+          ['W35','Julie Brims',2005,'7.99',''],
+          ['W40','Julie Brims',2006,'7.92',''],
+          ['W45','Julie Brims',2011,'7.75','A'],
+          ['W50','Julie Brims',2020,'7.96','A'],
+          ['W55','Julie Brims',2021,'7.95','A'],
+          ['W60','Wendy Sheaves-Doran',2010,'9.04',''],
+          ['W65','Carol Davis',2016,'9.12','A'],
+          ['W70','Carol Davis',2021,'9.69','A'],
+          ['W75','Marge Allison',2019,'10.84',''],
+          ['W80','Lorna Thompson',2007,'15.05',''],
+          ['W85','Christiane Dauphinet',2017,'17.08',''],
+        ],
+        '100m': [
+          ['W30','Wilma Perkins',1983,'12.2',''],
+          ['W35','Una Lund',1980,'12.1',''],
+          ['W40','Julie Brims',2007,'12.37',''],
+          ['W45','Julie Brims',2011,'12.37','A'],
+          ['W50','Julie Brims',2020,'12.10','A'],
+          ['W55','Julie Brims',2021,'12.24','W'],
+          ['W60','Wilma Perkins',2010,'14.59',''],
+          ['W65','Carol Davis',2016,'14.61','A'],
+          ['W70','Wilma Perkins',2020,'15.83',''],
+          ['W75','Marge Allison',2019,'17.08',''],
+          ['W80','Gene Mogg',1991,'23.0',''],
+          ['W85','Christiane Dauphinet',2017,'28.37',''],
+          ['W90','Christiane Dauphinet',2022,'34.02','A'],
+        ],
+        '200m': [
+          ['W30','Brigitte Mullen',1999,'25.15',''],
+          ['W35','Wilma Perkins',1987,'25.2',''],
+          ['W40','Julie Brims',2007,'25.13',''],
+          ['W45','Julie Brims',2011,'25.21','A'],
+          ['W50','Julie Brims',2020,'24.87','A'],
+          ['W55','Julie Brims',2021,'25.07','W'],
+          ['W60','Marge Allison',2005,'30.03',''],
+          ['W65','Jeanette Flynn',2018,'30.55','A'],
+          ['W70','Carol Davis',2021,'32.58',''],
+          ['W75','Marge Allison',2019,'35.13',''],
+          ['W80','Mavis Collins',1998,'60.43',''],
+          ['W85','Christiane Dauphinet',2016,'65.94',''],
+          ['W90','Christiane Dauphinet',2022,'76.28','A'],
+        ],
+        '300m': [
+          ['W30','Caroline Litchfield',2000,'44.63',''],
+          ['W35','Julie Brims',2005,'41.81',''],
+          ['W40','Julie Brims',2010,'41.11',''],
+          ['W45','Adrienne McIvor',2016,'40.29',''],
+          ['W50','Julie Brims',2016,'41.47',''],
+          ['W55','Julie Brims',2021,'40.57',''],
+          ['W60','Wendy Sheaves-Doran',2010,'48.38',''],
+          ['W65','Carol Davis',2016,'49.11',''],
+          ['W70','Carol Davis',2022,'52.53',''],
+          ['W75','Marge Allison',2020,'57.89',''],
+          ['W85','Christiane Dauphinet',2016,'1:44.87',''],
+        ],
+        '400m': [
+          ['W30','Angelina Blackburn',2022,'56.96',''],
+          ['W35','Wilma Perkins',1987,'58.60',''],
+          ['W40','Adrienne McIvor',2015,'56.47',''],
+          ['W45','Adrienne McIvor',2016,'56.60','A'],
+          ['W50','Julie Brims',2020,'58.55',''],
+          ['W55','Julie Brims',2021,'59.36','W'],
+          ['W60','Marge Allison / J. Flynn',2006,'67.51',''],
+          ['W65','Jeanette Flynn',2018,'69.01','A'],
+          ['W70','Marge Allison',2015,'76.60',''],
+          ['W75','Marge Allison',2019,'1:25.07','A'],
+          ['W80','Lorna Thompson',2007,'2:08.92',''],
+          ['W85','Christiane Dauphinet',2016,'2:22.65',''],
+          ['W90','Christiane Dauphinet',2022,'3:14.42','A'],
+        ],
+        '800m': [
+          ['W30','Katie Menzies',2012,'2:21.56',''],
+          ['W35','Shannon Hill',2019,'2:13.69',''],
+          ['W40','Adrienne McIvor',2015,'2:15.03',''],
+          ['W45','Adrienne McIvor',2016,'2:11.19','A'],
+          ['W50','Jeanette Flynn',2005,'2:16.05','A'],
+          ['W55','Jeanette Flynn',2007,'2:21.98','A'],
+          ['W60','Jeanette Flynn',2013,'2:33.96','A'],
+          ['W65','Jeanette Flynn',2016,'2:43.39','A'],
+          ['W70','Carol Davis',2021,'3:05.52',''],
+          ['W75','Marge Allison',2020,'3:33.28',''],
+          ['W80','Lorna Thompson',2007,'4:56.9',''],
+          ['W85','Christiane Dauphinet',2016,'5:26.22','A'],
+        ],
+        '1500m': [
+          ['W30','Tressa Lindenberg',2003,'4:53.44',''],
+          ['W35','Olga Firsova',2021,'4:28.19',''],
+          ['W40','Olga Firsova',2023,'4:25.30','A'],
+          ['W45','Jeanette Flynn',1997,'4:33.29',''],
+          ['W50','Jeanette Flynn',2005,'4:42.00','A'],
+          ['W55','Louisa Abram',2018,'4:59.36','A'],
+          ['W60','Jeanette Flynn',2012,'5:28.07','A'],
+          ['W65','Jeanette Flynn',2016,'5:47.83','A'],
+          ['W70','Marge Allison',2015,'6:57.23',''],
+          ['W75','Marge Allison',2019,'7:22.42',''],
+          ['W80','Lorna Thompson',2008,'10:21.26',''],
+        ],
+        '1 Mile': [
+          ['W30','Kayla Toro',2023,'5:56.70',''],
+          ['W35','Petrina Brown',2007,'5:55.67',''],
+          ['W40','Kerri Hodge',2018,'5:07.23',''],
+          ['W45','Jeanette Flynn',1997,'5:07.95',''],
+          ['W50','Jeanette Flynn',2004,'5:13.6','A'],
+          ['W55','Jeanette Flynn',2006,'5:27.57','A'],
+          ['W60','Jeanette Flynn',2012,'5:56.00','A'],
+          ['W65','Jeanette Flynn',2017,'6:17.10','A'],
+          ['W70','Irene Davey',2017,'8:17.84',''],
+          ['W75','Irene Davey',2023,'9:28.70',''],
+        ],
+        '2000m': [
+          ['W30','Kayla Toro',2023,'7:34.45',''],
+          ['W35','Kate Cecil',2022,'7:26.27',''],
+          ['W40','Taryn Axelsen',2023,'7:49.29',''],
+          ['W50','Peta Dunne',2022,'8:05.70',''],
+          ['W55','Tia Jones',2021,'7:51.49',''],
+          ['W60','Susan Thornton',2023,'8:53.87',''],
+          ['W70','Irene Davey',2020,'10:58.39',''],
+          ['W75','Irene Davey',2023,'12:09.06',''],
+        ],
+        '3000m': [
+          ['W30','Nerissa O\'Donnell',2019,'10:19.87',''],
+          ['W35','Olga Firsova',2023,'9:12.32',''],
+          ['W40','Olga Firsova',2024,'9:27.98',''],
+          ['W45','Kerri Hodge',2019,'10:04.8',''],
+          ['W50','Marcia Sheer',2009,'10:41.00',''],
+          ['W55','Louisa Abram',2018,'10:51.56',''],
+          ['W60','Anne Ryan',2015,'11:46.00','A'],
+          ['W65','Anne Ryan',2022,'13:10.92',''],
+          ['W70','Betty Menzies',2015,'15:47.34',''],
+          ['W75','Lorna Thompson',2002,'17:46.0',''],
+          ['W80','Lorna Thompson',2007,'20:28.81','A'],
+        ],
+        '5000m': [
+          ['W30','Nerissa O\'Donnell',2017,'18:11.71',''],
+          ['W35','Olga Firsova',2022,'16:28.78',''],
+          ['W40','Glenda Banaghan',2007,'17:05.51',''],
+          ['W45','Kerri Hodge',2019,'17:25.96',''],
+          ['W50','Marcia Sheer',2009,'18:24.31',''],
+          ['W55','Louisa Abram',2018,'18:24.57','A'],
+          ['W60','Anne Ryan',2016,'21:06.56',''],
+          ['W65','Anne Ryan',2021,'22:51.99',''],
+          ['W70','Betty Menzies',2016,'29:12.70',''],
+          ['W75','Lorna Thompson',2002,'29:48.53',''],
+          ['W80','Lorna Thompson',2008,'36:05.23',''],
+        ],
+        '10000m': [
+          ['W30','Tressa Lindenberg',2003,'38:27.0',''],
+          ['W35','Olga Firsova',2021,'34:07.27','A'],
+          ['W40','Glenda Banaghan',2007,'35:48.40',''],
+          ['W45','Glenda Banaghan',2009,'36:47.37',''],
+          ['W50','Nicola Bowker',2022,'39:15.18',''],
+          ['W55','Anne Ryan',2013,'41:34.98',''],
+          ['W60','Anne Ryan',2015,'44:10.91',''],
+          ['W65','Jeanette Flynn',2017,'50:11.50',''],
+          ['W70','Betty Menzies',2015,'57:46.29',''],
+          ['W75','Lorna Thompson',2003,'65:19.9',''],
+        ],
+        '2000m Steeple': [
+          ['W30','Anne Nowill',2008,'8:45.29',''],
+          ['W35','Tressa Lindenberg',2006,'7:41.34',''],
+          ['W40','Kerri Hodge',2017,'7:39.18',''],
+          ['W45','Kerri Hodge',2019,'7:33.24','A'],
+          ['W50','Peta Dunne',2024,'8:26.61',''],
+          ['W55','Miwa Kolb',2023,'9:09.14',''],
+          ['W60','Irene Davey',2008,'9:57.16',''],
+          ['W65','Irene Davey',2012,'10:26.48',''],
+          ['W70','Irene Davey',2017,'11:29.95',''],
+          ['W75','Irene Davey',2022,'13:25.76',''],
+        ],
+      }
+    },
+    hurdles: {
+      label: 'Hurdles',
+      events: {
+        '60m Hurdles': [
+          ['W35','Eliana Seymour',2023,'9.20','A'],
+          ['W45','Janet Webber',2024,'12.26','A'],
+          ['W55','Maryann Hearn',2023,'10.34','A'],
+          ['W70','Carol Davis',2023,'12.92','A'],
+        ],
+        '80m Hurdles': [
+          ['W40','Glynis Cearns',2001,'11.66','A'],
+          ['W45','Marie Kay',2009,'12.32','A'],
+          ['W50','Jan Hynes',1994,'12.8',''],
+          ['W55','Marie Kay',2015,'13.03',''],
+          ['W60','Una Lund',2001,'14.24',''],
+          ['W65','Wilma Perkins',2016,'15.09','A'],
+          ['W70','Carol Davis',2021,'16.98','A'],
+          ['W75','Marge Allison',2020,'18.67','A'],
+        ],
+        '100m Hurdles': [
+          ['W30','Eliana Seymour',2016,'13.94','A'],
+          ['W35','Eliana Seymour',2024,'14.72','A'],
+        ],
+        '200m Hurdles': [
+          ['W70','Carol Davis',2021,'36.53','A'],
+        ],
+        '300m Hurdles': [
+          ['W50','Jan Hynes',1994,'45.8','A'],
+          ['W55','Wilma Perkins',2005,'55.00',''],
+          ['W60','Marge Allison',2005,'51.64','A'],
+          ['W65','Marge Allison',2011,'54.06','W'],
+        ],
+        '400m Hurdles': [
+          ['W30','Jo Sherman',1999,'65.74',''],
+          ['W35','Julie Brims',2004,'65.69',''],
+          ['W40','Jan Hynes',1987,'62.80','A'],
+          ['W45','Jan Hynes',1994,'64.09',''],
+        ],
+      }
+    },
+    field: {
+      label: 'Field',
+      events: {
+        'Long Jump': [
+          ['W30','Maree Bugeja',2005,'5.61m',''],
+          ['W35','Jan Hynes',1983,'5.89m','A'],
+          ['W40','Glynis Cearns',2001,'5.77m','A'],
+          ['W45','Marie Kay',2008,'5.52m','A'],
+          ['W50','Marie Kay',2010,'5.41m','A'],
+          ['W55','Marie Kay',2016,'5.01m','A'],
+          ['W60','Wilma Perkins',2011,'4.32m',''],
+          ['W65','Carol Davis',2018,'4.07m','A'],
+          ['W70','Carol Davis',2021,'4.01m','A'],
+          ['W75','Marge Allison',2020,'3.02m',''],
+          ['W80','Gene Mogg',1992,'1.74m',''],
+        ],
+        'Triple Jump': [
+          ['W30','Maree Bugeja',2006,'11.68m',''],
+          ['W35','Dash Newington',2024,'11.13m',''],
+          ['W40','Glynis Cearns',2001,'11.45m',''],
+          ['W45','Jan Hynes',1991,'10.58m',''],
+          ['W50','Jan Hynes',1994,'9.97m',''],
+          ['W55','Una Lund',1997,'8.97m',''],
+          ['W60','Una Lund',2001,'8.80m',''],
+          ['W65','Carol Davis',2018,'7.90m',''],
+          ['W70','Carol Davis',2023,'7.16m',''],
+        ],
+        'High Jump': [
+          ['W30','Ashleigh Reid',2022,'1.71m','A'],
+          ['W35','Deann Mayfield',1999,'1.73m','A'],
+          ['W40','Deann Mayfield',2002,'1.71m','A'],
+          ['W45','Deann Mayfield',2009,'1.63m','A'],
+          ['W50','Deann Mayfield',2012,'1.56m','A'],
+          ['W55','Deann Mayfield',2017,'1.53m','A'],
+          ['W60','Deann Mayfield',2022,'1.41m','A'],
+          ['W65','Marge Allison',2009,'1.27m','A'],
+          ['W70','Carol Davis',2021,'1.14m',''],
+          ['W75','Marge Allison',2020,'1.12m','A'],
+        ],
+        'Pole Vault': [
+          ['W30','Ruth Miller',1991,'2.00m',''],
+          ['W35','Dash Newington',2024,'3.62m',''],
+          ['W40','Dash Newington',2024,'3.60m',''],
+          ['W45','Wilma Perkins',1998,'2.62m',''],
+          ['W50','Wilma Perkins',2000,'2.70m',''],
+          ['W55','Wilma Perkins',2005,'2.50m',''],
+          ['W60','Wilma Perkins',2010,'2.33m',''],
+          ['W65','Wilma Perkins',2016,'2.19m','A'],
+          ['W70','Wilma Perkins',2020,'2.06m','A'],
+        ],
+        'Shot Put': [
+          ['W30','Nicole Luyten',2023,'12.12m',''],
+          ['W35','Una Lund',1980,'11.86m',''],
+          ['W40','Una Lund',1981,'11.90m',''],
+          ['W45','Una Lund',1987,'11.30m',''],
+          ['W50','Una Lund',1991,'12.17m',''],
+          ['W55','Heather Doherty',1993,'11.70m',''],
+          ['W60','Heather Doherty',1993,'12.18m',''],
+          ['W65','Helen Searle',2004,'11.58m','A'],
+          ['W70','Helen Searle',2011,'9.98m','A'],
+          ['W75','Helen Searle',2015,'10.40m','A'],
+          ['W80','Helen Searle',2019,'9.24m','A'],
+          ['W85','Heather Doherty',2018,'5.21m',''],
+          ['W95','Ruth Frith',2004,'5.25m','A'],
+          ['W100','Ruth Frith',2010,'4.48m','A'],
+        ],
+        'Discus': [
+          ['W30','Kelly Humphries',2011,'41.33m',''],
+          ['W35','Una Lund',1980,'39.96m',''],
+          ['W40','Una Lund',1982,'42.30m',''],
+          ['W45','Una Lund',1990,'39.38m',''],
+          ['W50','Una Lund',1991,'38.46m',''],
+          ['W55','Una Lund',1996,'35.30m','A'],
+          ['W60','Heather Doherty',1994,'33.24m','A'],
+          ['W65','Heather Doherty',1999,'30.74m','A'],
+          ['W70','Heather Doherty',2006,'25.45m','A'],
+          ['W75','Una Lund',2018,'25.32m','A'],
+          ['W80','Heather Doherty',2014,'22.28m','A'],
+          ['W85','Heather Doherty',2018,'14.89m','A'],
+          ['W95','Ruth Frith',2006,'10.90m','A'],
+          ['W100','Ruth Frith',2011,'9.30m','W'],
+        ],
+        'Hammer': [
+          ['W30','Kelly Humphries',2014,'49.28m',''],
+          ['W35','Finn Connors',2017,'38.87m',''],
+          ['W40','Kathy Newman',2008,'42.95m',''],
+          ['W45','Althea Mackie',2015,'42.13m',''],
+          ['W50','Althea Mackie',2024,'44.05m',''],
+          ['W55','Heather Doherty',1992,'33.80m',''],
+          ['W60','Helen Searle',2001,'46.09m','W'],
+          ['W65','Helen Searle',2006,'41.41m',''],
+          ['W70','Helen Searle',2009,'34.86m',''],
+          ['W75','Helen Searle',2015,'32.55m',''],
+          ['W80','Helen Searle',2019,'27.03m','A'],
+          ['W85','Heather Doherty',2018,'17.80m',''],
+          ['W95','Ruth Frith',2006,'13.71m','A'],
+          ['W100','Ruth Frith',2010,'11.30m','W'],
+        ],
+        'Javelin': [
+          ['W30','Sallyann Moller',2016,'36.32m',''],
+          ['W35','Leonie Hoffman',2013,'35.82m',''],
+          ['W40','Lee-Anne Grosvenor',2013,'31.88m',''],
+          ['W45','Marie Kay',2009,'32.30m',''],
+          ['W50','Sueli Dashwood',2016,'38.12m','A'],
+          ['W55','Marie Kay',2016,'33.69m',''],
+          ['W60','Lesley Duncan',2024,'29.43m',''],
+          ['W65','Carol Davis',2018,'25.51m','A'],
+          ['W70','Carol Davis',2021,'22.70m',''],
+          ['W75','Heather Doherty',2008,'19.83m',''],
+          ['W80','Heather Doherty',2014,'19.45m',''],
+          ['W85','Heather Doherty',2018,'11.42m',''],
+          ['W90','Ruth Frith',2002,'9.84m',''],
+          ['W95','Ruth Frith',2006,'9.03m','A'],
+          ['W100','Ruth Frith',2009,'6.43m','W'],
+        ],
+      }
+    },
+    walks: {
+      label: 'Walks',
+      events: {
+        '800m Walk': [
+          ['W30','Roslyn Kirwin',2023,'5:19.15',''],
+          ['W35','Dash Newington',2023,'4:34.71',''],
+          ['W40','Tracey Hollis',2023,'5:17.72',''],
+          ['W45','Brenda Gannon',2023,'4:00.15',''],
+          ['W65','Mary McGregor',2023,'5:36.20',''],
+          ['W80','Noela McKinnen',2023,'6:43.87',''],
+        ],
+        '1500m Walk': [
+          ['W30','Roslyn Kirwin',2021,'9:24.52',''],
+          ['W35','Barbara Keelan',1997,'8:34.10',''],
+          ['W40','Brenda Gannon',2017,'7:51.78',''],
+          ['W45','Brenda Gannon',2021,'7:43.12',''],
+          ['W50','Felicja Schmidt',2002,'8:01.65',''],
+          ['W55','Erika Woodward',2021,'8:23.51',''],
+          ['W60','Sally Lynch',2003,'8:11.27',''],
+          ['W65','Sally Lynch',2011,'9:11.8',''],
+          ['W70','Sally Lynch',2013,'9:56.74',''],
+          ['W75','Lorna Thompson',2002,'10:20.98',''],
+          ['W80','Lorna Thompson',2008,'11:12.83','A'],
+          ['W85','Christiane Dauphinet',2016,'12:16.53',''],
+        ],
+        '3000m Walk': [
+          ['W30','Karen Iselin',1989,'13:55.8','A'],
+          ['W35','Lyn Gordon',1992,'14:42.7',''],
+          ['W40','Lyn Lewis',1999,'15:34.9',''],
+          ['W45','Georgina Mackay',1994,'15:58.3',''],
+          ['W50','Erika Woodward',2016,'16:24.97',''],
+          ['W55','Erika Woodward',2021,'17:22.51',''],
+          ['W60','Sally Lynch',2004,'17:51.63',''],
+          ['W65','Sally Lynch',2009,'18:53.08',''],
+          ['W70','Christiane Dauphinet',2001,'19:56.80',''],
+          ['W75','Lorna Thompson',2002,'20:42.15',''],
+          ['W80','Lorna Thompson',2008,'22:15.42','A'],
+          ['W85','Christiane Dauphinet',2016,'24:16.19',''],
+        ],
+        '5000m Walk': [
+          ['W30','Karen Iselin',1989,'24:13.2',''],
+          ['W35','Lyn Gordon',1991,'25:23.5',''],
+          ['W40','Karen Iselin',1997,'25:55.34',''],
+          ['W45','Lyn Lewis',2000,'27:47.00',''],
+          ['W50','Felicja Schmidt',2001,'28:03.69',''],
+          ['W55','Erika Woodward',2021,'29:48.67',''],
+          ['W60','Sally Lynch',2003,'30:29.0',''],
+          ['W65','Sally Lynch',2009,'31:43.18',''],
+          ['W70','Lorna Thompson',1998,'34:06.8',''],
+          ['W75','Lorna Thompson',2002,'34:40.70','A'],
+          ['W80','Lorna Thompson',2007,'38:54.73','A'],
+          ['W85','Christiane Dauphinet',2016,'40:36.35',''],
+        ],
+        '10000m Walk': [
+          ['W30','Karen Iselin',1987,'50:58.0',''],
+          ['W35','Lyn Gordon',1991,'53:50.8',''],
+          ['W40','Lyn Lewis',1999,'55:14.3',''],
+          ['W45','Georgina Mackay',1994,'56:23.7',''],
+          ['W50','Felicja Schmidt',2001,'58:04.8',''],
+          ['W55','Noela McKinven',1997,'63:02.4',''],
+          ['W60','Sally Lynch',2005,'65:35.00',''],
+          ['W65','Christiane Dauphinet',2000,'68:14.5',''],
+          ['W70','Christiane Dauphinet',2001,'70:59.7',''],
+          ['W75','Lorna Thompson',2002,'70:48.2',''],
+          ['W80','Christiane Dauphinet',2012,'1:23:08',''],
+        ],
+      }
+    },
+    road: {
+      label: 'Road',
+      events: {
+        '10km Road': [
+          ['W30','Nerissa O\'Donnell',2019,'36:46','A'],
+          ['W35','Olga Firsova',2022,'33:53','A'],
+          ['W40','Kerri Hodge',2018,'37:13',''],
+          ['W45','Kerri Hodge',2019,'36:07',''],
+          ['W50','Nicola Bowker',2022,'38:55',''],
+          ['W55','Krishna Stanton',2022,'38:24',''],
+          ['W60','Susan Thornton',2023,'45:08',''],
+          ['W65','Anne Ryan',2022,'44:15',''],
+          ['W70','Sylvie Martin',2021,'55:02',''],
+          ['W75','Irene Davey',2024,'69:07',''],
+        ],
+        'Half Marathon': [
+          ['W30','Nerissa O\'Donnell',2019,'1:19:49',''],
+          ['W35','Shiloh Watts',2016,'1:23:15',''],
+          ['W40','Glenda Banaghan',2007,'1:19:10',''],
+          ['W45','Kerri Hodge',2019,'1:19:39',''],
+          ['W50','Nicola Bowker',2022,'1:24:00',''],
+          ['W55','Krishna Stanton',2023,'1:21:12',''],
+          ['W60','Anne Ryan',2016,'1:31:54',''],
+          ['W65','Betty Menzies',2009,'1:47:35',''],
+          ['W70','S. Thureau-Martin',2023,'2:08:40',''],
+          ['W75','Lorna Thompson',2003,'2:32:18',''],
+        ],
+        'Marathon': [
+          ['W30','Nerissa O\'Donnell',2019,'2:51:22',''],
+          ['W35','Lyn Stern',1994,'3:02:05',''],
+          ['W40','Beth McKenzie',2022,'2:38:19',''],
+          ['W45','Kerri Hodge',2019,'2:45:35',''],
+          ['W50','Nicola Bowker',2022,'2:56:47',''],
+          ['W55','Krishna Stanton',2022,'2:48:06','A'],
+          ['W60','Susan Thornton',2023,'3:37:59',''],
+          ['W65','Lesley Le Vaillant',2010,'3:50:00',''],
+          ['W70','Lesley Le Vaillant',2013,'4:34:59',''],
+        ],
+      }
+    },
+  };
+
+  const MEN = {
+    track: {
+      label: 'Track',
+      events: {
+        '60m': [
+          ['M30','Aaron Stubbs',2021,'7.05',''],['M35','Gary Finegan',2023,'7.07','A'],['M40','Travis Venema',2016,'7.34',''],
+          ['M45','Stephen Jones',2009,'7.40',''],['M50','Wayne Cousins',2011,'7.40',''],['M55','John Wight',2001,'7.41','A'],
+          ['M60','Craig Parker',2021,'7.80','A'],['M65','Rob McDonald',2010,'8.10',''],['M70','Glen Wilson',2011,'8.41','A'],
+          ['M75','Hugh Coogan',2012,'8.78',''],['M80','Tom Brown',1999,'9.42','A'],['M85','Hugh Coogan',2022,'10.18',''],
+          ['M90','Maurice Dauphinet',2016,'13.01',''],
+        ],
+        '100m': [
+          ['M30','Gary Finegan',2019,'10.70','A'],['M35','Gary Finegan',2022,'10.92',''],['M40','Heinz Steinmann',1984,'10.9',''],
+          ['M45','Ted Eden',1977,'11.4',''],['M50','Michael Berlin',2022,'11.85',''],['M55','Christopher Brack',2021,'11.99',''],
+          ['M60','Bernie Hogan',1981,'12.15','A'],['M65','Mick Pirie',1994,'12.62',''],['M70','Hugh Coogan',2009,'13.34',''],
+          ['M75','Hugh Coogan',2012,'13.86',''],['M80','George Harrod',2009,'15.76',''],['M85','Hugh Coogan',2022,'16.97',''],
+          ['M90','Harry Gathercole',1997,'19.99',''],['M100','Les Amey',2000,'58.29','A'],
+        ],
+        '200m': [
+          ['M30','Gary Finegan',2019,'21.50',''],['M35','Kevin Silver',1987,'22.1',''],['M40','Heinz Steinmann',1984,'22.5',''],
+          ['M45','Graham Scully',2021,'23.45',''],['M50','Graham Scully',2024,'23.93',''],['M55','Christopher Brack',2022,'24.21',''],
+          ['M60','Bernie Hogan',1981,'25.23',''],['M65','Bernie Hogan',1985,'25.6',''],['M70','Hugh Coogan',2005,'26.84','A'],
+          ['M75','Hugh Coogan',2011,'28.44',''],['M80','Charlie Hankins',1997,'33.83',''],['M85','Harry Gathercole',1993,'35.99',''],
+          ['M90','Harry Gathercole',1997,'44.24',''],
+        ],
+        '300m': [
+          ['M30','Murray Goodwin',2019,'33.75',''],['M35','Gary Finegan',2023,'35.08',''],['M40','Graham Scully',2017,'37.02',''],
+          ['M45','Gary Parkinson',2016,'37.17',''],['M50','Gary Parkinson',2020,'37.93',''],['M55','Christopher Brack',2022,'37.73',''],
+          ['M60','Colin Buyers',2005,'40.76',''],['M65','Colin Buyers',2008,'41.75',''],['M70','Hugh Coogan',2007,'43.54',''],
+          ['M75','Hugh Coogan',2012,'45.03',''],['M80','Colin Woods',2016,'55.08',''],['M85','Maurice Dauphinet',2011,'76.37',''],
+        ],
+        '400m': [
+          ['M30','Murray Goodwin',2018,'46.24','A'],['M35','Nev Appleby',1991,'50.4',''],['M40','Tony Blue',1977,'50.5',''],
+          ['M45','Gary Parkinson',2016,'52.60',''],['M50','Gary Parkinson',2018,'53.72',''],['M55','Christopher Brack',2022,'53.03',''],
+          ['M60','Colin Buyers',2005,'57.35',''],['M65','Colin Buyers',2007,'58.90',''],['M70','Hugh Coogan',2006,'60.77','A'],
+          ['M75','Hugh Coogan',2011,'64.10','A'],['M80','Colin Woods',2016,'77.72',''],['M85','Harry Gathercole',1993,'1:33.50',''],
+          ['M90','Alex Pittendrich',1997,'1:57.78',''],['M95','Alex Pittendrich',2001,'2:50.1','A'],
+        ],
+        '800m': [
+          ['M30','Murray Goodwin',2020,'1:54.79',''],['M35','Nev Appleby',1990,'1:55.0',''],['M40','Tony Blue',1977,'1:54.80',''],
+          ['M45','Alan Bradford',1987,'1:58.65','A'],['M50','Alan Bradford',1989,'2:00.40','A'],['M55','Peter Hawes',2011,'2:07.87',''],
+          ['M60','Alan Bradford',1999,'2:10.42','A'],['M65','Alan Bradford',2004,'2:22.15',''],['M70','Alan Bradford',2009,'2:28.78',''],
+          ['M75','Hugh Coogan',2012,'2:40.26',''],['M80','Colin Woods',2016,'3:10.71',''],['M85','Alex Pittendrich',1993,'4:13.0',''],
+          ['M90','Alex Pittendrich',1997,'4:28.20','A'],
+        ],
+        '1500m': [
+          ['M30','Aidan Hobbs',2018,'3:54.79',''],['M35','Aidan Hobbs',2021,'3:53.69',''],['M40','Tony Blue',1977,'3:57.3',''],
+          ['M45','Alan Bradford',1984,'4:03.16',''],['M50','Alan Bradford',1989,'4:08.09',''],['M55','Alan Bradford',1995,'4:27.40',''],
+          ['M60','Alan Bradford',1999,'4:35.18',''],['M65','Ian Cameron',2019,'4:51.87',''],['M70','Merv Jenkinson',1979,'5:11.8',''],
+          ['M75','Norm Gulbransen',1991,'5:49.02',''],['M80','Colin McLeod',2016,'6:32.17',''],['M85','Norm Pearce',2010,'9:03.28',''],
+          ['M90','Alex Pittendrich',1998,'11:04.39',''],['M100','Les Amey',2000,'16:46.41','W'],
+        ],
+        '1 Mile': [
+          ['M30','Aidan Hobbs',2018,'4:16.40',''],['M35','Peter Bracken',2018,'4:34.72',''],['M40','Shane George',2006,'4:34.5',''],
+          ['M45','Michael Jackson',2023,'4:35.25',''],['M50','David Sweeney',2011,'4:44.3',''],['M55','Alan Bradford',1996,'4:52.5',''],
+          ['M60','Peter Reeves',2014,'5:03.37',''],['M65','Alan Bradford',2004,'5:14.9',''],['M70','Peter Reeves',2023,'5:53.32',''],
+          ['M75','Colin Woods',2010,'6:53.02',''],['M80','Colin McLeod',2016,'7:01.40',''],
+        ],
+        '2000m': [
+          ['M30','Matthew Reeves',2024,'6:12.64',''],['M40','Shane Matterson',2024,'6:28.81',''],['M45','Paul Dodd',2022,'6:18.03',''],
+          ['M50','Sean Needham',2024,'6:37.29',''],['M55','Tony Skinner',2024,'7:23.86',''],['M65','Robert Gunningham',2022,'7:56.50',''],
+          ['M70','Peter Reeves',2024,'7:48.97',''],['M75','John Sheer',2023,'9:57.57',''],
+        ],
+        '3000m': [
+          ['M30','Aidan Hobbs',2021,'8:13.56','A'],['M35','Aidan Hobbs',2024,'8:18.78','A'],['M40','Shane George',2006,'8:51.25',''],
+          ['M45','David Sweeney',2008,'8:56.46',''],['M50','David Sweeney',2012,'9:13.53',''],['M55','David Sweeney',2017,'9:36.27',''],
+          ['M60','Peter Reeves',2014,'9:57.08',''],['M65','Alan Bradford',2004,'10:30.50',''],['M70','Colin McLeod',2006,'11:26.8',''],
+          ['M75','Colin McLeod',2012,'12:56.02',''],['M80','Colin McLeod',2016,'13:35.60',''],
+        ],
+        '5000m': [
+          ['M30','Aidan Hobbs',2020,'14:34.70','A'],['M35','Aidan Hobbs',2021,'14:15.34','A'],['M40','Shane George',2007,'15:15.24',''],
+          ['M45','David Sweeney',2007,'15:29.64',''],['M50','Alan Bradford',1991,'15:51.2',''],['M55','Alan Bradford',1994,'16:03.9',''],
+          ['M60','Alan Bradford',1999,'17:11.9',''],['M65','Colin McLeod',2001,'17:51.34',''],['M70','Ian Cameron',2024,'18:43.00',''],
+          ['M75','Colin McLeod',2012,'20:58.75',''],['M80','Colin McLeod',2016,'22:58.42','A'],
+        ],
+        '10000m': [
+          ['M30','Aidan Hobbs',2019,'30:58.49','A'],['M35','Aidan Hobbs',2022,'31:14.96',''],['M40','Joe Patterson',1975,'31:57.0',''],
+          ['M45','Ron Peters',2001,'31:48.69',''],['M50','Ron Peters',2003,'32:54.8',''],['M55','David Sweeney',2016,'33:15.16',''],
+          ['M60','Alan Bradford',1999,'35:51.81',''],['M65','Colin McLeod',2001,'37:02.3',''],['M70','Ian Cameron',2024,'38:19.70','A'],
+          ['M75','Colin McLeod',2013,'45:03.69',''],['M80','Colin McLeod',2016,'47:13.84','A'],
+        ],
+        '2000m Steeple': [
+          ['M60','Alan Bradford',1999,'6:54.31','A'],['M65','Alan Bradford',2004,'7:18.2','A'],['M70','Alan Bradford',2009,'8:20.95',''],
+          ['M75','Michael Juckes',2015,'10:14.82',''],['M80','Michael Juckes',2019,'11:20.46',''],
+        ],
+        '3000m Steeple': [
+          ['M30','Aidan Hobbs',2021,'8:50.22','A'],['M35','Aidan Hobbs',2022,'9:03.30',''],['M40','Doug Worling',1975,'9:24.3',''],
+          ['M45','Doug Worling',1981,'9:41.49',''],['M50','Alan Bradford',1989,'9:51.62','A'],['M55','Alan Bradford',1994,'10:14.00','A'],
+        ],
+      }
+    },
+    hurdles: {
+      label: 'Hurdles',
+      events: {
+        '110m Hurdles': [
+          ['M30','Stuart Anderson',2012,'14.47',''],['M35','Harry Giles',1979,'15.6',''],
+          ['M40','Harry Giles',1988,'15.9',''],['M45','Harry Giles',1992,'15.5',''],
+        ],
+        '100m Hurdles': [
+          ['M45','Trevor O\'Friel',2024,'23.37',''],['M50','David Reed',2024,'18.30',''],
+          ['M55','Harry Giles',1994,'15.42','A'],['M60','Harry Giles',2007,'16.34',''],['M65','Harry Giles',2010,'17.73',''],
+        ],
+        '80m Hurdles': [
+          ['M70','Garvin Brown',1999,'14.42',''],['M75','Harry Giles',2019,'17.04',''],
+          ['M80','Pio Bunin',2022,'19.29',''],['M85','Vic Younger',2000,'26.65',''],
+        ],
+        '60m Hurdles': [
+          ['M35','Yudhbir Singh',2023,'12.12',''],['M60','David Varley',2023,'10.78','A'],['M65','Joe Begley',2023,'13.15',''],
+          ['M70','Bruce Bodsworth',2023,'12.77','A'],['M75','Peter Kennedy',2024,'13.25','A'],['M80','Pio Bunin',2023,'14.21','A'],
+        ],
+        '400m Hurdles': [
+          ['M30','Harry Giles',1977,'52.2',''],['M35','Harry Giles',1981,'56.09',''],['M40','Harry Giles',1988,'56.73',''],
+          ['M45','Harry Giles',1989,'58.02',''],['M50','Harry Giles',1994,'62.14',''],['M55','Gary Parkinson',2024,'64.48',''],
+        ],
+        '300m Hurdles': [
+          ['M60','Harry Giles',2006,'46.8',''],['M65','Harry Giles',2010,'50.39',''],['M70','Bruce Bodsworth',2021,'52.31',''],
+          ['M75','Alan Bradford',2015,'60.72',''],['M80','Russell Grigg',2008,'1:53.14',''],['M85','Vic Younger',1998,'1:59.8',''],
+        ],
+        '200m Hurdles': [
+          ['M80','Alan Bradford',2019,'41.53','A'],
+        ],
+      }
+    },
+    field: {
+      label: 'Field',
+      events: {
+        'Long Jump': [
+          ['M30','Matt McEwen',2004,'7.20m',''],['M35','John Davis',1992,'6.42m',''],['M40','Garry Donaldson',1988,'6.22m',''],
+          ['M45','Harry Giles',1990,'6.19m',''],['M50','Garry Donaldson',1994,'5.82m',''],['M55','Gary Parkinson',2023,'5.81m',''],
+          ['M60','Harry Giles',2004,'4.98m',''],['M65','Spencer Herft',2003,'4.79m',''],['M70','Spencer Herft',2008,'4.43m',''],
+          ['M75','Garvin Brown',2004,'3.85m',''],['M80','Pio Bunin',2023,'3.68m',''],['M85','Vic Younger',1999,'3.17m','A'],
+          ['M90','Maurice Dauphinet',2016,'2.44m',''],['M95','Alex Pittendrich',2001,'1.67m','A'],
+        ],
+        'Triple Jump': [
+          ['M30','Lance Faulkner',2016,'13.26m',''],['M35','Richard Anderson',1989,'12.77m',''],['M40','Derek Boosey',1982,'14.02m',''],
+          ['M45','Derek Boosey',1989,'12.88m',''],['M50','Jim Christian',1988,'11.33m',''],['M55','Tony Collins',2012,'10.80m',''],
+          ['M60','Spencer Herft',1998,'10.28m',''],['M65','Spencer Herft',2003,'9.78m',''],['M70','Spencer Herft',2008,'9.23m',''],
+          ['M75','Maurice Dauphinet',2004,'8.00m',''],['M80','Vic Younger',1993,'7.95m',''],['M85','Vic Younger',1998,'6.59m',''],
+          ['M90','Alex Pittendrich',1996,'5.51m','A'],['M95','Alex Pittendrich',2001,'3.55m','A'],
+        ],
+        'High Jump': [
+          ['M30','Matt McEwen',2004,'1.97m','A'],['M35','John Howard',1991,'1.85m',''],['M40','Euan McLean',2019,'1.82m',''],
+          ['M45','Ben Dickson',2011,'1.80m',''],['M50','Ben Dickson',2014,'1.77m','A'],['M55','Brian Key',2016,'1.60m',''],
+          ['M60','Brian Prideaux',2004,'1.52m',''],['M65','Alan Rolfe',1994,'1.47m',''],['M70','Alan Rolfe',1999,'1.41m',''],
+          ['M75','Lynton Lewis',2015,'1.25m',''],['M80','Vic Younger',1994,'1.19m',''],['M85','Vic Younger',1999,'1.10m','A'],
+          ['M90','Jim O\'Donnell',2018,'0.90m',''],
+        ],
+        'Pole Vault': [
+          ['M30','Matt McEwen',2004,'4.90m','A'],['M35','Howard Arbuthnot',2004,'4.80m',''],['M40','Rob Hill',2010,'4.80m','A'],
+          ['M45','Rob Hill',2015,'4.60m','A'],['M50','Howard Arbuthnot',2021,'4.30m','A'],['M55','Howard Arbuthnot',2022,'4.00m','A'],
+          ['M60','Allan Cameron',2012,'3.00m',''],['M65','Garvin Brown',1994,'3.15m',''],['M70','Garvin Brown',2000,'3.14m','A'],
+          ['M75','Garvin Brown',2003,'2.85m',''],['M80','Vic Younger',1995,'1.76m',''],['M85','Vic Younger',2000,'1.74m','A'],
+        ],
+        'Shot Put': [
+          ['M30','Dean Cowan (7.26kg)',2002,'15.65m',''],['M35','Peter Phillips (7.26kg)',1978,'15.89m',''],
+          ['M40','Peter Lonsdale (7.26kg)',2000,'15.06m',''],['M45','Peter Phillips (7.26kg)',1987,'14.19m',''],
+          ['M50','Peter Lonsdale (6kg)',2016,'15.52m',''],['M55','Peter Clark (6kg)',2001,'12.25m',''],
+          ['M60','Mike Katmadas (5kg)',1999,'12.92m',''],['M65','Arvo Ropelin (5kg)',2002,'11.81m',''],
+          ['M70','Feliks Jekabsons (4kg)',1993,'12.66m',''],['M75','Feliks Jekabsons (4kg)',1998,'11.24m',''],
+          ['M80','Dash Daniels (3kg)',2019,'10.87m',''],['M85','Feliks Jekabsons (3kg)',2008,'9.66m','A'],
+          ['M90','Feliks Jekabsons (3kg)',2014,'6.95m','A'],['M95','Maurice Dauphinet (3kg)',2022,'4.49m','A'],
+        ],
+        'Discus': [
+          ['M30','Warren Evans (2kg)',2003,'47.03m',''],['M35','Darron Haworth (2kg)',2008,'54.15m','A'],
+          ['M40','Darron Haworth (2kg)',2009,'54.35m','A'],['M45','Peter Lonsdale (2kg)',2012,'50.28m',''],
+          ['M50','Justin Holzer (1.5kg)',2021,'51.27m',''],['M55','Warwick Selvey (1.5kg)',1995,'44.42m',''],
+          ['M60','Warwick Selvey (1kg)',2001,'53.43m','A'],['M65','Warwick Selvey (1kg)',2005,'45.76m',''],
+          ['M70','Charlie Rann (1kg)',2000,'38.92m',''],['M75','Charlie Rann (1kg)',2003,'36.88m','A'],
+          ['M80','Nick Bannenberg (1kg)',2021,'28.61m',''],['M85','Feliks Jekabsons (1kg)',2008,'25.28m','A'],
+          ['M90','Maurice Dauphinet (1kg)',2016,'19.33m',''],['M95','Maurice Dauphinet (1kg)',2022,'11.37m','A'],
+        ],
+        'Hammer': [
+          ['M30','Brad Monk (7.26kg)',1995,'58.88m',''],['M35','Darron Haworth (7.26kg)',2008,'54.85m',''],
+          ['M40','Ron Frawley (7.26kg)',1991,'50.20m',''],['M45','Bob Wagner (7.26kg)',2006,'51.95m',''],
+          ['M50','Bob Wagner (6kg)',2007,'53.98m',''],['M55','Bob Wagner (6kg)',2012,'46.42m',''],
+          ['M60','Mark Cumming (5kg)',2023,'52.24m',''],['M65','Lajos Joni (5kg)',2021,'43.41m',''],
+          ['M70','Charlie Rann (4kg)',1999,'44.09m',''],['M75','Charlie Rann (4kg)',2003,'38.31m',''],
+          ['M80','Guy Quarterman (3kg)',2021,'34.98m',''],['M85','Feliks Jekabsons (3kg)',2008,'27.36m',''],
+          ['M90','Feliks Jekabsons (3kg)',2014,'19.12m',''],['M95','Maurice Dauphinet (3kg)',2022,'9.77m','A'],
+        ],
+        'Javelin': [
+          ['M30','Matt McEwen (800g)',2004,'61.60m',''],['M35','Mark Stevens (800g)',1989,'59.52m',''],
+          ['M40','Michael Frawley (800g)',1992,'56.28m',''],['M45','John Kay (800g)',2008,'52.26m',''],
+          ['M50','John Kay (700g)',2009,'54.37m',''],['M55','John Kay (700g)',2015,'44.62m',''],
+          ['M60','Hans Beste (600g)',2003,'38.26m',''],['M65','Guy Quarterman (600g)',2007,'39.55m',''],
+          ['M70','Erkki Saarinen (500g)',2006,'42.00m','A'],['M75','Erkki Saarinen (500g)',2010,'38.12m','A'],
+          ['M80','Erkki Saarinen (400g)',2013,'33.80m','A'],['M85','Vic Younger (400g)',2000,'21.98m',''],
+          ['M90','Maurice Dauphinet (400g)',2016,'17.11m','A'],['M95','Maurice Dauphinet (400g)',2022,'9.09m','A'],
+        ],
+      }
+    },
+    walks: {
+      label: 'Walks',
+      events: {
+        '800m Walk': [
+          ['M50','Dean Nipperess',2023,'3:53.35',''],['M65','Peter Bennett',2023,'4:36.56',''],['M70','Bruce O\'Connor',2023,'6:46.94',''],
+        ],
+        '1500m Walk': [
+          ['M30','Michael Day',2016,'10:54.00',''],['M35','Andrew Ludwig',2002,'6:24.70',''],['M40','Dean Nipperess',2014,'6:06.67',''],
+          ['M45','Peter Bennett',2002,'6:25.06',''],['M50','Peter Bennett',2006,'6:44.38',''],['M55','Ignacio Jimenez',2023,'6:43.81','A'],
+          ['M60','Peter Bennett',2016,'7:23.00',''],['M65','Ian Richardson',2010,'7:49.63',''],['M70','Frank Clark',2015,'8:58.39',''],
+          ['M75','Richard Lynch',2004,'9:18.56',''],['M80','Dick Keatinge',2003,'10:33.46',''],['M85','Dick Keatinge',2008,'11:07.00','A'],
+          ['M90','John Alroy',1999,'12:56.85',''],
+        ],
+        '3000m Walk': [
+          ['M30','Ignacio Jimenez',1996,'12:45.81','A'],['M35','Dave Smith',1994,'11:34.1',''],['M40','Dave Smith',2000,'12:08.42',''],
+          ['M45','Dave Smith',2001,'13:20.2',''],['M50','Ignacio Jimenez',2018,'13:36.95',''],['M55','Ignacio Jimenez',2021,'13:55.07',''],
+          ['M60','Peter Bennett',2016,'14:31.38',''],['M65','Ian Richardson',2014,'16:17.71',''],['M70','Richard Lynch',2000,'18:11.87',''],
+          ['M75','Richard Lynch',2014,'19:07.78',''],['M80','Dick Keatinge',2003,'20:46.80',''],['M85','Dick Keatinge',2008,'21:42.09',''],
+          ['M90','John Alroy',1995,'25:33.9',''],
+        ],
+        '5000m Walk': [
+          ['M30','Ignacio Jimenez',1996,'21:38.52','A'],['M35','David Smith',1994,'19:53.0','A'],['M40','David Smith',2000,'20:47.7',''],
+          ['M45','David Smith',2001,'22:30.1',''],['M50','Ignacio Jimenez',2018,'23:21.25',''],['M55','Ignacio Jimenez',2022,'23:22.0',''],
+          ['M60','Peter Bennett',2016,'24:58.78',''],['M65','Ian Richardson',2014,'29:02.85',''],['M70','Richard Lynch',2001,'30:49.35',''],
+          ['M75','Richard Lynch',2004,'32:19.64',''],['M80','Dick Keatinge',2003,'34:50.11',''],['M85','Dick Keatinge',2008,'37:27.25',''],
+          ['M90','John Alroy',1995,'43:08.0',''],
+        ],
+        '10000m Walk': [
+          ['M30','Ignacio Jimenez',1996,'44:45.4',''],['M35','Andrew Ludwig',2004,'47:07.04',''],['M40','Dave Smith',2000,'44:04.84',''],
+          ['M45','Peter Bennett',2001,'48:28.4',''],['M50','Iggy Jimenez',2018,'49:25.76',''],['M55','Robert Mee',1994,'49:50.3',''],
+          ['M60','Peter Bennett',2016,'52:14.64',''],['M65','Patrick Sela',2005,'63:22.1',''],['M70','Eric Bailey',1994,'63:09.5',''],
+          ['M75','Richard Lynch',2005,'67:39.25',''],['M80','Dick Keatinge',2003,'72:09.6',''],['M85','Dick Keatinge',2008,'75:34.0',''],
+        ],
+      }
+    },
+    road: {
+      label: 'Road',
+      events: {
+        '10km Road': [
+          ['M30','Aidan Hobbs',2017,'33:37','A'],['M35','Aidan Hobbs',2022,'29:27','A'],['M40','Peter Bracken',2022,'31:59',''],
+          ['M45','Derrick Leahy',2022,'32:40',''],['M50','David Sweeney',2014,'32:58',''],['M55','David Sweeney',2017,'33:50',''],
+          ['M60','Gary Mayor',2023,'35:31',''],['M65','John Shaw',2019,'37:39',''],['M70','Ron Peters',2024,'41:56.8',''],
+          ['M75','Colin McLeod',2015,'47:19',''],['M80','Colin Woods',2015,'55:01','A'],
+        ],
+        'Half Marathon': [
+          ['M30','Aidan Hobbs',2019,'1:06:26','A'],['M35','Aidan Hobbs',2022,'1:06:05','A'],['M40','Peter Connolly',1986,'1:10:12',''],
+          ['M45','Wayne Spies',2022,'1:09:15','A'],['M50','Wayne Spies',2023,'1:10:33',''],['M55','Ron Peters',2009,'1:12:19','A'],
+          ['M60','Ron Peters',2013,'1:15:07',''],['M65','Colin McLeod',2002,'1:19:06',''],['M70','Ian Cameron',2024,'1:25:32',''],
+          ['M75','Colin McLeod',2013,'1:39:28',''],['M80','Robert Horman',2000,'1:46:00','A'],['M85','Robert Horman',2004,'2:05:11','A'],
+        ],
+        'Marathon': [
+          ['M30','Aidan Hobbs',2018,'2:23:00','A'],['M35','Aidan Hobbs',2022,'2:20:08',''],['M40','Peter Connolly',1985,'2:29:09',''],
+          ['M45','Wayne Spies',2022,'2:25:47',''],['M50','Wayne Spies',2023,'2:27:40',''],['M55','Ron Peters',2009,'2:37:27','A'],
+          ['M60','Ron Peters',2015,'2:43:57',''],['M65','John Shaw',2019,'2:51:21','A'],['M70','Colin McLeod',2006,'3:04:07',''],
+          ['M75','Robert Horman',1997,'3:41:08',''],['M80','Robert Horman',1998,'3:39:18','A'],['M85','Robert Horman',2004,'4:34:55','A'],
+        ],
+      }
+    },
+  };
+
+  /* ── State ── */
+  let currentGender = 'women';
+  let currentData = WOMEN;
+  let currentCat = 'track';
+  let currentEvent = '60m';
+
+  /* ── Gender switch ── */
+  function switchGender(gender) {
+    if (gender === currentGender) return;
+    currentGender = gender;
+    currentData = gender === 'men' ? MEN : WOMEN;
+    currentCat = Object.keys(currentData)[0];
+    currentEvent = Object.keys(currentData[currentCat].events)[0];
+    document.getElementById('btnWomen').classList.toggle('active', gender === 'women');
+    document.getElementById('btnMen').classList.toggle('active', gender === 'men');
+    render();
+  }
+
+  /* ── Render ── */
+  function renderCatTabs() {
+    const el = document.getElementById('catTabs');
+    const extra = [
+      { key: 'relays', label: 'Relays' },
+      { key: 'combined', label: 'Combined' },
+    ];
+    el.innerHTML =
+      Object.entries(currentData).map(([key, val]) =>
+        `<button class="cat-tab${key === currentCat ? ' active' : ''}" data-cat="${key}" role="tab" aria-selected="${key === currentCat}">${val.label}</button>`
+      ).join('') +
+      extra.map(e => `<button class="cat-tab" disabled title="Coming soon">${e.label}</button>`).join('');
+
+    el.querySelectorAll('.cat-tab:not([disabled])').forEach(btn =>
+      btn.addEventListener('click', () => {
+        currentCat = btn.dataset.cat;
+        currentEvent = Object.keys(currentData[currentCat].events)[0];
+        render();
+      })
+    );
+  }
+
+  function renderEventPills() {
+    const el = document.getElementById('eventPills');
+    el.innerHTML = Object.keys(currentData[currentCat].events).map(ev =>
+      `<button class="event-pill${ev === currentEvent ? ' active' : ''}" data-ev="${ev}">${ev}</button>`
+    ).join('');
+    el.querySelectorAll('.event-pill').forEach(btn =>
+      btn.addEventListener('click', () => {
+        currentEvent = btn.dataset.ev;
+        render();
+      })
+    );
+  }
+
+  function renderTable() {
+    const rows = currentData[currentCat].events[currentEvent] || [];
+    const label = document.getElementById('currentEventLabel');
+    label.innerHTML = `<span class="ev-cat">${currentData[currentCat].label}</span> — ${currentEvent}`;
+
+    document.getElementById('recordsBody').innerHTML = rows.length
+      ? rows.map(([age, name, year, perf, flag]) => {
+          const badge = flag === 'A'
+            ? '<span class="rec-badge badge-a" title="Australian record at time of setting">A</span>'
+            : flag === 'W'
+            ? '<span class="rec-badge badge-w" title="World record / wind-assisted">W</span>'
+            : '';
+          return `<tr>
+            <td><span class="age-group">${age}</span></td>
+            <td><span class="athlete-name">${name}</span></td>
+            <td><span class="rec-year">${year}</span></td>
+            <td><span class="rec-perf">${perf}</span>${badge}</td>
+          </tr>`;
+        }).join('')
+      : `<tr><td colspan="4" class="no-records">No records on file for this event.</td></tr>`;
+  }
+
+  function render() {
+    renderCatTabs();
+    renderEventPills();
+    renderTable();
+  }
+
+  render();
+</script>
+</body>
+</html>
