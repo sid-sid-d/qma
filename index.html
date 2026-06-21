@@ -924,13 +924,12 @@
             border-top: 3px solid var(--gold);
         }
         .footer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: start;
             gap: 40px;
             padding-bottom: 36px;
             border-bottom: 1px solid rgba(255,255,255,0.08);
-            flex-wrap: wrap;
         }
         .footer-brand { display: flex; gap: 18px; align-items: flex-start; }
         .footer-brand img { height: 60px; flex-shrink: 0; }
@@ -1378,7 +1377,7 @@
             .volunteer-inner { flex-direction: column; gap: 24px; }
             .volunteer-banner::before { display: none; }
 
-            .footer-top { flex-direction: column; gap: 28px; }
+            .footer-top { grid-template-columns: 1fr; gap: 28px; }
 
             .quiz-shell { padding: 28px; }
             .quiz-options { grid-template-columns: 1fr; }
